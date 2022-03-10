@@ -1,0 +1,12 @@
+spring:
+  # 配置数据库连接池
+  datasource:
+    url: jdbc:mysql://10.0.0.53:3306/daoki?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1470634109
+  ### 配置Redis
+  redis:
+    database: 0
+    host: 10.0.0.32
+    port: 6379
+    password: 1470634109
