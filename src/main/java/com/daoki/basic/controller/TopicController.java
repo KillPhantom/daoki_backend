@@ -1,6 +1,8 @@
 package com.daoki.basic.controller;
 
 import com.daoki.basic.VO.request.CreateTopicVO;
+import com.daoki.basic.VO.request.DeleteTopicVO;
+import com.daoki.basic.VO.request.FuzzySearchTopicVO;
 import com.daoki.basic.VO.request.UpdateTopicVO;
 import com.daoki.basic.VO.response.ResultVO;
 import com.daoki.basic.service.ITopicService;
@@ -43,19 +45,19 @@ public class TopicController {
 
     @ApiOperation("delete topic")
     @PostMapping("/delete")
-    public ResultVO deleteTopic(@NotNull @RequestParam String id){
-        topicService.deleteTopic(id);
+    public ResultVO deleteTopic(@NotNull @RequestBody DeleteTopicVO deleteTopicVO){
+        topicService.deleteTopic(deleteTopicVO);
         return ResultVoUtil.success(null,"delete topic successfully");
     }
 
     @ApiOperation("query fuzzily topic by name")
-    @GetMapping("/queryByName")
-    public ResultVO getTopicByName(@NotNull @RequestParam String name){
-        return ResultVoUtil.success(topicService.getTopicByName(name),"get topic form successfully");
+    @GetMapping("/Name")
+    public ResultVO getTopicByName(@NotNull @RequestBody FuzzySearchTopicVO fuzzySearchTopicVO){
+        return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
     }
 
     @ApiOperation("query topic by topic id")
-    @GetMapping("/queryById")
+    @GetMapping("/Id")
     public ResultVO getTopicById(@NotNull @RequestParam String id){
         return ResultVoUtil.success(topicService.getTopicById(id),"get topic successfully");
     }

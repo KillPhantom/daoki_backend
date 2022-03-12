@@ -26,13 +26,13 @@ public class HotTopicController {
     private final IHotTopicService hotTopicService;
 
     @ApiOperation("get the form of hot topics")
-    @PostMapping("/getHotTopics")
+    @GetMapping("/HotTopics")
     public ResultVO getHotTopics(){
         return ResultVoUtil.success(hotTopicService.getHotTopics(),"get the form of hot topics successfully");
     }
 
     @ApiOperation("get a hot topic by topic id")
-    @PostMapping("/getHotTopic")
+    @GetMapping("/HotTopic")
     public ResultVO getHotTopic(@NotNull @RequestParam String topicId){
         return ResultVoUtil.success(hotTopicService.getHotTopic(topicId),"get hot topic successfully");
     }

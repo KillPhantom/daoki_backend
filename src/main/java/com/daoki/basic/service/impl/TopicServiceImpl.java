@@ -1,10 +1,8 @@
 package com.daoki.basic.service.impl;
 
-import com.daoki.basic.VO.request.CreateContentVO;
-import com.daoki.basic.VO.request.CreateTopicVO;
-import com.daoki.basic.VO.request.UpdateContentVO;
-import com.daoki.basic.VO.request.UpdateTopicVO;
+import com.daoki.basic.VO.request.*;
 import com.daoki.basic.VO.response.FuzzySearchTopicFormVO;
+import com.daoki.basic.VO.response.PageVO;
 import com.daoki.basic.VO.response.TopicVO;
 import com.daoki.basic.entity.Content;
 import com.daoki.basic.entity.OperateHistory;
@@ -20,9 +18,12 @@ import com.daoki.basic.repository.TopicRepository;
 import com.daoki.basic.service.IContentService;
 import com.daoki.basic.service.ITopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSInput;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -46,6 +47,9 @@ public class TopicServiceImpl implements ITopicService {
 
     @Autowired
     private OperateHistoryRepository operateHistoryRepository;
+
+    @Value("${daoki.web.hotTopicUrlPre:}${server.servlet.context-path:}")
+    private String linkPre;
 
     /**
      * create topic
@@ -130,55 +134,53 @@ public class TopicServiceImpl implements ITopicService {
 
     /**
      * delete topic according to topic id
-     * @param topicId id in database of topic
+     * @param deleteTopicVO vo for deleting a topic
      */
     @Override
-    public void deleteTopic(String topicId) {
+    public void deleteTopic(DeleteTopicVO deleteTopicVO) {
         // if the topic with this topic id cannot be found in database, an error will be thrown
         if (Objects.isNull(
-                topicRepository.findTopicById(topicId))){
+                topicRepository.findTopicById(deleteTopicVO.getTopicId()))){
             throw new CustomException(ErrorEnum.DELETE_TOPIC_ERROR, "deleteTopic");
         }
-        topicRepository.deleteTopicById(topicId);
-        for (Content content : contentRepository.findContentsByTopicId(topicId)){
+        topicRepository.deleteTopicById(deleteTopicVO.getTopicId());
+        for (Content content : contentRepository.findContentsByTopicId(deleteTopicVO.getTopicId())){
             contentService.deleteContent(content.getId());
         }
 
-        operateHistoryRepository.deleteByTopicId(topicId);
+        OperateHistory operateHistory = new OperateHistory();
+        operateHistory.setOperator(deleteTopicVO.getOperator());
+        operateHistory.setAction(TopicOperateEnum.OPERATE_DELETE);
+        operateHistory.setTime(new Date());
+        operateHistory.setTopicId(deleteTopicVO.getTopicId());
+        operateHistoryRepository.save(operateHistory);
     }
 
     /**
-     * search topics fuzzily according content title
-     * @param name content title
-     * @return list of fuzzy searching topic vo
+     * search topics fuzzily according keyword
+     * @param fuzzySearchTopicVO key word used for searching fuzzily
+     * @return page of fuzzy searching topic vo
      */
     @Override
-    public List<FuzzySearchTopicFormVO> getTopicByName(String name) {
-        Pageable pageable = PageRequest.of(0,10);
-        List<Content> contentList = contentRepository.findContentsByTitleLike(pageable, name).getContent();
+    public PageVO<FuzzySearchTopicFormVO> getTopicByName(FuzzySearchTopicVO fuzzySearchTopicVO) {
+        Pageable pageable = PageRequest.of(fuzzySearchTopicVO.getPage(),fuzzySearchTopicVO.getSize());
+        Page<Topic> topicPage = topicRepository.findTopicsByNameLike(pageable, fuzzySearchTopicVO.getKeyword());
+        List<Topic> topicList = topicPage.getContent();
 
-        // if no content be found in database, an error will be throw
-        if (contentList.isEmpty()){
-            throw new CustomException(ErrorEnum.GET_TOPIC_ERROR, "getTopic");
-        }
+        List<FuzzySearchTopicFormVO> topicVOList
+                = topicList.stream().map(topic -> {
+                    FuzzySearchTopicFormVO fuzzySearchTopicFormVO = new FuzzySearchTopicFormVO();
+                    fuzzySearchTopicFormVO.setTitle(topic.getName());
+                    fuzzySearchTopicFormVO.setLink(linkPre+"/topic/Id?id="+topic.getId());
+                    fuzzySearchTopicFormVO.setDescription("nothing");
+                    return fuzzySearchTopicFormVO;
+                }).collect(Collectors.toList());
 
-        // get the topic ids of all content found in database
-        Set<String> topicIdSet = new HashSet<>();
-        for (Content content : contentList){
-            topicIdSet.add(content.getTopicId());
-        }
-        // get the list of topics with the topic ids found in database
-        List<Topic> topicList = new ArrayList<>();
-        for (String topicId : topicIdSet){
-            topicList.add(topicRepository.findTopicById(topicId));
-        }
-        return topicList.stream().map(topic -> {
-            FuzzySearchTopicFormVO fuzzySearchTopicFormVO = new FuzzySearchTopicFormVO();
-            fuzzySearchTopicFormVO.setTitle(topic.getName());
-            fuzzySearchTopicFormVO.setLink("http://localhost:8080/daoki/topic/queryById?id="+topic.getId());
-            fuzzySearchTopicFormVO.setDescription("nothing");
-            return fuzzySearchTopicFormVO;
-        }).collect(Collectors.toList());
+        return new PageVO<>(fuzzySearchTopicVO.getPage(),
+                fuzzySearchTopicVO.getSize(),
+                topicPage.getTotalPages(),
+                topicPage.getTotalElements(),
+                topicVOList);
     }
 
     /**

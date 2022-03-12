@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Document("topic_name")
+@Document("topic")
 public class Topic extends BaseDO implements Serializable {
 
     /**

@@ -33,6 +33,7 @@ public class UpdateTopicVO {
     private List<UpdateContentVO> content;
 
     @ApiModelProperty("the operator of topic updating")
+    @NotNull(message = "the operator mustn't be null")
     private String operator;
 
 }

@@ -11,8 +11,7 @@ import lombok.Data;
  * Description: a element object of form of the topic fuzzy searching results
  */
 @Data
-@ApiModel("element object of form of the topic fuzzy searching results, " +
-        "Note that the fuzzy searching only aims at the title of content module")
+@ApiModel("element object of form of the topic fuzzy searching results")
 public class FuzzySearchTopicFormVO {
 
     @ApiModelProperty("the name of topic")

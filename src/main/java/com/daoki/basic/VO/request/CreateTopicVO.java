@@ -28,6 +28,7 @@ public class CreateTopicVO {
     private List<CreateContentVO> content;
 
     @ApiModelProperty("the creator of this topic")
+    @NotNull(message = "the operator mustn't be null")
     private String operator;
 
 }

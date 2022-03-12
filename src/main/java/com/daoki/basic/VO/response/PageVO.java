@@ -18,39 +18,26 @@ import java.util.List;
 @ApiModel("page view object")
 public class PageVO<T> {
 
-    @ApiModelProperty(value = "分页数据")
-    private List<T> records;
+    @ApiModelProperty(value = "page number")
+    private Integer pageNo;
 
-    @ApiModelProperty(value = "总条数")
-    private Integer total;
+    @ApiModelProperty(value = "page size")
+    private Integer pageSize;
 
-    @ApiModelProperty(value = "总页数")
-    private Integer pages;
+    @ApiModelProperty(value = "the number of page")
+    private Integer totalPage;
 
-    @ApiModelProperty(value = "当前页")
-    private Integer current;
+    @ApiModelProperty(value = "the number of searched recording")
+    private long totalCount;
 
-    @ApiModelProperty(value = "查询数量")
-    private Integer size;
+    @ApiModelProperty(value = "the list of results")
+    private List<T> items;
 
-    /**
-     * 设置当前页和每页显示的数量
-     * @param pageForm 分页表单
-     * @return 返回分页信息
-     */
-    @ApiModelProperty(hidden = true)
-    public PageVO<T> setCurrentAndSize(PageDTO<?> pageForm){
-        BeanUtils.copyProperties(pageForm,this);
-        return this;
-    }
-
-    /**
-     * 设置总记录数
-     * @param total 总记录数
-     */
-    @ApiModelProperty(hidden = true)
-    public void setTotal(Integer total) {
-        this.total = total;
-        this.setPages(this.total % this.size > 0 ? this.total / this.size + 1 : this.total / this.size);
+    public PageVO(int pageNo, int pageSize, int totalPage, long totalCount, List<T> items) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+        this.totalPage = totalPage;
+        this.totalCount = totalCount;
+        this.items = items;
     }
 }

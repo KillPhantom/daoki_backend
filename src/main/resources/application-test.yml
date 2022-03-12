@@ -1,3 +1,7 @@
+daoki:
+  web:
+    hotTopicUrlPre: http://localhost:8080
+
 spring:
 #  # 配置数据库连接池,目前 不采用 mysql,暂时先保留,后续再说
 #  datasource:

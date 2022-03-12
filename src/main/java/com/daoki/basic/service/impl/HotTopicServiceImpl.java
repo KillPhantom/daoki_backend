@@ -9,6 +9,7 @@ import com.daoki.basic.repository.TopicRepository;
 import com.daoki.basic.service.IHotTopicService;
 import com.daoki.basic.service.ITopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -30,6 +31,9 @@ public class HotTopicServiceImpl implements IHotTopicService {
     @Autowired
     private ITopicService topicService;
 
+    @Value("${daoki.web.hotTopicUrlPre:}${server.servlet.context-path:}")
+    private String linkPre;
+
     /**
      * get the form of hot topics
      * @return list of hot topics
@@ -48,7 +52,7 @@ public class HotTopicServiceImpl implements IHotTopicService {
         return hotTopics.stream().map(topic -> {
             HotTopicFormVO hotTopicVO = new HotTopicFormVO();
             hotTopicVO.setTitle(topic.getName());
-            hotTopicVO.setLink("http://localhost:8080/daoki/topic/queryById?id="+topic.getId());
+            hotTopicVO.setLink(linkPre+"/topic/Id?id="+topic.getId());
             hotTopicVO.setDescription("nothing");
             return hotTopicVO;
         }).collect(Collectors.toList());
