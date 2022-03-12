@@ -2,6 +2,8 @@ package com.daoki.basic.VO.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.Data;
 
 /**
@@ -11,25 +13,16 @@ import lombok.Data;
  * Description: 固定返回格式
  */
 @Data
-@ApiModel("固定返回格式")
+@ApiModel("response with certain format")
 public class ResultVO {
 
-    /**
-     * 错误码
-     */
-    @ApiModelProperty("错误码")
+    @ApiModelProperty("status code")
     private String code;
 
-    /**
-     * 提示信息
-     */
-    @ApiModelProperty("提示信息")
+    @ApiModelProperty("message")
     private String message;
 
-    /**
-     * 具体的内容
-     */
-    @ApiModelProperty("响应数据")
+    @ApiModelProperty("response data")
     private Object data;
 
 }

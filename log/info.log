@@ -88,3 +88,162 @@
 2022-03-12 18:31:09.460 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 7 ms
 2022-03-12 18:52:01.193 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2022-03-12 18:52:01.209 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:14}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 18:53:32.251 [restartedMain] INFO  com.daoki.basic.MainApplication - Starting MainApplication on zlldeMacBook-Pro.local with PID 68006 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 18:53:32.253 [restartedMain] INFO  com.daoki.basic.MainApplication - The following profiles are active: test
+2022-03-12 18:53:32.310 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-12 18:53:32.310 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-12 18:53:33.114 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 18:53:33.189 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69ms. Found 3 MongoDB repository interfaces.
+2022-03-12 18:53:33.666 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-03-12 18:53:33.676 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 18:53:33.677 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-12 18:53:33.677 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-12 18:53:33.756 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring embedded WebApplicationContext
+2022-03-12 18:53:33.756 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1446 ms
+2022-03-12 18:53:34.136 [restartedMain] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 18:53:34.201 [cluster-ClusterId{value='622c7bae50a5225ddf935209', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:15}] to 127.0.0.1:27017
+2022-03-12 18:53:34.208 [cluster-ClusterId{value='622c7bae50a5225ddf935209', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4051881}
+2022-03-12 18:53:34.363 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-12 18:53:34.452 [restartedMain] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:16}] to 127.0.0.1:27017
+2022-03-12 18:53:34.971 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 18:53:35.085 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 18:53:35.245 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 18:53:35.264 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 18:53:35.292 [restartedMain] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 18:53:35.469 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 18:53:35.503 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-12 18:53:35.506 [restartedMain] INFO  com.daoki.basic.MainApplication - Started MainApplication in 23.865 seconds (JVM running for 29.591)
+2022-03-12 18:53:40.829 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-12 18:53:40.829 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-12 18:53:40.840 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2022-03-12 18:56:33.389 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 18:56:33.394 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:16}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 18:57:02.353 [restartedMain] INFO  com.daoki.basic.MainApplication - Starting MainApplication on zlldeMacBook-Pro.local with PID 68056 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 18:57:02.354 [restartedMain] INFO  com.daoki.basic.MainApplication - The following profiles are active: test
+2022-03-12 18:57:02.390 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-12 18:57:02.390 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-12 18:57:03.033 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 18:57:03.096 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59ms. Found 3 MongoDB repository interfaces.
+2022-03-12 18:57:03.445 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-03-12 18:57:03.452 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 18:57:03.453 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-12 18:57:03.453 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-12 18:57:03.519 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring embedded WebApplicationContext
+2022-03-12 18:57:03.519 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1128 ms
+2022-03-12 18:57:03.846 [restartedMain] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 18:57:03.894 [cluster-ClusterId{value='622c7c7f17f420524b41912a', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:17}] to 127.0.0.1:27017
+2022-03-12 18:57:03.902 [cluster-ClusterId{value='622c7c7f17f420524b41912a', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4424367}
+2022-03-12 18:57:04.021 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-12 18:57:04.110 [restartedMain] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:18}] to 127.0.0.1:27017
+2022-03-12 18:57:04.449 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 18:57:04.532 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 18:57:04.662 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 18:57:04.676 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 18:57:04.699 [restartedMain] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 18:57:04.828 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 18:57:04.858 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-12 18:57:04.862 [restartedMain] INFO  com.daoki.basic.MainApplication - Started MainApplication in 22.897 seconds (JVM running for 28.465)
+2022-03-12 18:57:12.003 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-12 18:57:12.004 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-12 18:57:12.010 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2022-03-12 19:15:40.690 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 19:15:40.705 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:18}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 19:16:09.711 [restartedMain] INFO  com.daoki.basic.MainApplication - Starting MainApplication on zlldeMacBook-Pro.local with PID 68270 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 19:16:09.713 [restartedMain] INFO  com.daoki.basic.MainApplication - The following profiles are active: test
+2022-03-12 19:16:09.748 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-12 19:16:09.749 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-12 19:16:10.360 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 19:16:10.422 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 58ms. Found 3 MongoDB repository interfaces.
+2022-03-12 19:16:10.811 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-03-12 19:16:10.817 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:16:10.818 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-12 19:16:10.818 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-12 19:16:10.886 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring embedded WebApplicationContext
+2022-03-12 19:16:10.886 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1137 ms
+2022-03-12 19:16:11.268 [restartedMain] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 19:16:11.306 [cluster-ClusterId{value='622c80fb739375174a291d98', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:19}] to 127.0.0.1:27017
+2022-03-12 19:16:11.311 [cluster-ClusterId{value='622c80fb739375174a291d98', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2420836}
+2022-03-12 19:16:11.419 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-12 19:16:11.483 [restartedMain] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:20}] to 127.0.0.1:27017
+2022-03-12 19:16:11.794 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 19:16:11.869 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 19:16:11.980 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 19:16:11.992 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 19:16:12.014 [restartedMain] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 19:16:12.025 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:16:12.051 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-12 19:16:12.054 [restartedMain] INFO  com.daoki.basic.MainApplication - Started MainApplication in 22.728 seconds (JVM running for 28.221)
+2022-03-12 19:18:06.073 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 19:18:06.079 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:20}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 19:18:33.522 [restartedMain] INFO  com.daoki.basic.MainApplication - Starting MainApplication on zlldeMacBook-Pro.local with PID 68305 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 19:18:33.523 [restartedMain] INFO  com.daoki.basic.MainApplication - The following profiles are active: test
+2022-03-12 19:18:33.560 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-12 19:18:33.560 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-12 19:18:34.181 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 19:18:34.247 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 62ms. Found 3 MongoDB repository interfaces.
+2022-03-12 19:18:34.615 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-03-12 19:18:34.621 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:18:34.622 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-12 19:18:34.622 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-12 19:18:34.679 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring embedded WebApplicationContext
+2022-03-12 19:18:34.679 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1119 ms
+2022-03-12 19:18:35.001 [restartedMain] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 19:18:35.041 [cluster-ClusterId{value='622c818a4ec63f79accb3154', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:21}] to 127.0.0.1:27017
+2022-03-12 19:18:35.046 [cluster-ClusterId{value='622c818a4ec63f79accb3154', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2755203}
+2022-03-12 19:18:35.171 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-12 19:18:35.276 [restartedMain] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:22}] to 127.0.0.1:27017
+2022-03-12 19:18:35.706 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 19:18:35.783 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 19:18:35.891 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 19:18:35.904 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 19:18:35.927 [restartedMain] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 19:18:36.050 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:18:36.078 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-12 19:18:36.080 [restartedMain] INFO  com.daoki.basic.MainApplication - Started MainApplication in 22.964 seconds (JVM running for 28.451)
+2022-03-12 19:19:05.230 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-12 19:19:05.231 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-03-12 19:19:05.244 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2022-03-12 22:57:13.197 [Thread-49] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 22:57:13.210 [Thread-49] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:22}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 22:57:33.556 [restartedMain] INFO  com.daoki.basic.MainApplication - Starting MainApplication on zlldeMacBook-Pro.local with PID 68305 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 22:57:33.556 [restartedMain] INFO  com.daoki.basic.MainApplication - The following profiles are active: test
+2022-03-12 22:57:34.138 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 22:57:34.163 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24ms. Found 3 MongoDB repository interfaces.
+2022-03-12 22:57:34.294 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-03-12 22:57:34.294 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 22:57:34.295 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-12 22:57:34.295 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-12 22:57:34.309 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/daoki] - Initializing Spring embedded WebApplicationContext
+2022-03-12 22:57:34.309 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 745 ms
+2022-03-12 22:57:34.337 [restartedMain] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 22:57:34.357 [cluster-ClusterId{value='622cb4de4ec63f79accb3158', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:23}] to 127.0.0.1:27017
+2022-03-12 22:57:34.359 [cluster-ClusterId{value='622cb4de4ec63f79accb3158', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=460594}
+2022-03-12 22:57:34.365 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-12 22:57:34.380 [restartedMain] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:4, serverValue:24}] to 127.0.0.1:27017
+2022-03-12 22:57:34.509 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 22:57:34.547 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 22:57:34.596 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 22:57:34.596 [restartedMain] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 22:57:34.600 [restartedMain] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 22:57:34.638 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 22:57:34.640 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-12 22:57:34.641 [restartedMain] INFO  com.daoki.basic.MainApplication - Started MainApplication in 21.183 seconds (JVM running for 5066.07)
+2022-03-12 22:57:34.643 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2022-03-12 22:57:43.822 [main] INFO  com.daoki.basic.MainApplicationTests - Starting MainApplicationTests on zlldeMacBook-Pro.local with PID 69742 (started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-12 22:57:43.823 [main] INFO  com.daoki.basic.MainApplicationTests - The following profiles are active: test
+2022-03-12 22:57:44.562 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-12 22:57:44.642 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72ms. Found 3 MongoDB repository interfaces.
+2022-03-12 22:57:45.370 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-12 22:57:45.446 [cluster-ClusterId{value='622cb4e94bb54f4f8ffc8527', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:25}] to 127.0.0.1:27017
+2022-03-12 22:57:45.452 [cluster-ClusterId{value='622cb4e94bb54f4f8ffc8527', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3589658}
+2022-03-12 22:57:45.689 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:26}] to 127.0.0.1:27017
+2022-03-12 22:57:46.379 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-12 22:57:46.671 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-12 22:57:46.892 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-12 22:57:46.921 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-12 22:57:46.947 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-12 22:57:47.129 [main] INFO  com.daoki.basic.MainApplicationTests - Started MainApplicationTests in 23.84 seconds (JVM running for 24.925)
+2022-03-12 22:57:47.437 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 22:57:47.442 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:26}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-12 23:00:23.096 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-12 23:00:23.101 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:4, serverValue:24}] to 127.0.0.1:27017 because the pool has been closed.

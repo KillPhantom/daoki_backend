@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-10T16:38:40+0800",
+    date = "2022-03-12T22:57:14+0800",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_211 (Oracle Corporation)"
 )
 public class ContentConvertImpl implements ContentConvert {

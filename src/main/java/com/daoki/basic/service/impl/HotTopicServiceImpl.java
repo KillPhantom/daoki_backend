@@ -52,7 +52,7 @@ public class HotTopicServiceImpl implements IHotTopicService {
         return hotTopics.stream().map(topic -> {
             HotTopicFormVO hotTopicVO = new HotTopicFormVO();
             hotTopicVO.setTitle(topic.getName());
-            hotTopicVO.setLink(linkPre+"/topic/Id?id="+topic.getId());
+            hotTopicVO.setLink(linkPre+"/topic/id?id="+topic.getId());
             hotTopicVO.setDescription("nothing");
             return hotTopicVO;
         }).collect(Collectors.toList());

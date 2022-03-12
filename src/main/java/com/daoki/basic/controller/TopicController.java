@@ -8,6 +8,8 @@ import com.daoki.basic.VO.response.ResultVO;
 import com.daoki.basic.service.ITopicService;
 import com.daoki.basic.utils.ResultVoUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +53,13 @@ public class TopicController {
     }
 
     @ApiOperation("query fuzzily topic by name")
-    @GetMapping("/Name")
+    @GetMapping("/name")
     public ResultVO getTopicByName(@NotNull @RequestBody FuzzySearchTopicVO fuzzySearchTopicVO){
         return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
     }
 
     @ApiOperation("query topic by topic id")
-    @GetMapping("/Id")
+    @GetMapping("/id")
     public ResultVO getTopicById(@NotNull @RequestParam String id){
         return ResultVoUtil.success(topicService.getTopicById(id),"get topic successfully");
     }

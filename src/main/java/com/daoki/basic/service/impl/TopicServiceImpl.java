@@ -171,7 +171,7 @@ public class TopicServiceImpl implements ITopicService {
                 = topicList.stream().map(topic -> {
                     FuzzySearchTopicFormVO fuzzySearchTopicFormVO = new FuzzySearchTopicFormVO();
                     fuzzySearchTopicFormVO.setTitle(topic.getName());
-                    fuzzySearchTopicFormVO.setLink(linkPre+"/topic/Id?id="+topic.getId());
+                    fuzzySearchTopicFormVO.setLink(linkPre+"/topic/id?id="+topic.getId());
                     fuzzySearchTopicFormVO.setDescription("nothing");
                     return fuzzySearchTopicFormVO;
                 }).collect(Collectors.toList());
