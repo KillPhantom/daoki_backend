@@ -1,0 +1,142 @@
+2022-03-01 13:52:45.348 [main] INFO  com.daoki.basic.MainApplicationTests - Starting MainApplicationTests on zlldeMacBook-Pro.local with PID 34056 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 13:52:45.350 [main] INFO  com.daoki.basic.MainApplicationTests - The following profiles are active: test
+2022-03-01 13:52:46.168 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 13:52:46.255 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78ms. Found 2 MongoDB repository interfaces.
+2022-03-01 13:52:47.034 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 13:52:47.079 [cluster-ClusterId{value='621db4af4ef7a16a0a9d2b00', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 127.0.0.1:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:70)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:128)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:64)
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:79)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:65)
+	... 3 common frames omitted
+2022-03-01 13:52:47.357 [main] INFO  org.mongodb.driver.cluster - Cluster description not yet available. Waiting for 30000 ms before timing out
+2022-03-01 13:53:17.378 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-03-01 14:05:12.059 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 34192 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 14:05:12.061 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 14:05:12.817 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 14:05:12.893 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69ms. Found 2 MongoDB repository interfaces.
+2022-03-01 14:05:13.591 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 14:05:13.636 [cluster-ClusterId{value='621db799bef77a58f6e7215f', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 127.0.0.1:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:70)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:128)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:64)
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:79)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:65)
+	... 3 common frames omitted
+2022-03-01 14:05:13.898 [main] INFO  org.mongodb.driver.cluster - Cluster description not yet available. Waiting for 30000 ms before timing out
+2022-03-01 14:05:43.919 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-03-01 14:06:30.557 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 34359 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 14:06:30.559 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 14:06:31.434 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 14:06:31.518 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78ms. Found 2 MongoDB repository interfaces.
+2022-03-01 14:06:32.334 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 14:06:32.422 [cluster-ClusterId{value='621db7e813e0f30122c9f687', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:1}] to 127.0.0.1:27017
+2022-03-01 14:06:32.428 [cluster-ClusterId{value='621db7e813e0f30122c9f687', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3780480}
+2022-03-01 14:06:32.678 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:2}] to 127.0.0.1:27017
+2022-03-01 14:06:33.926 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-01 14:06:34.286 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-01 14:06:34.522 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-01 14:06:34.555 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-01 14:06:34.585 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-01 14:06:34.606 [main] INFO  com.daoki.basic.hotTopicsTest - Started contentConvertTest in 24.548 seconds (JVM running for 25.403)
+2022-03-01 14:06:34.847 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-01 14:06:34.851 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:2}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-01 14:11:43.869 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 34432 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 14:11:43.871 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 14:11:44.716 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 14:11:44.797 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74ms. Found 2 MongoDB repository interfaces.
+2022-03-01 14:11:45.500 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 14:11:45.601 [cluster-ClusterId{value='621db9218e469b7347da5225', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:3}] to 127.0.0.1:27017
+2022-03-01 14:11:45.608 [cluster-ClusterId{value='621db9218e469b7347da5225', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3870296}
+2022-03-01 14:11:45.904 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:4}] to 127.0.0.1:27017
+2022-03-01 14:11:46.696 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-01 14:11:47.041 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-01 14:11:47.276 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-01 14:11:47.300 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-01 14:11:47.338 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-01 14:11:47.356 [main] INFO  com.daoki.basic.hotTopicsTest - Started contentConvertTest in 23.92 seconds (JVM running for 24.701)
+2022-03-01 14:11:47.571 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-01 14:11:47.574 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:4}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-01 16:24:25.209 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 35655 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 16:24:25.211 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 16:24:25.584 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-03-01 16:28:32.777 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 35697 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 16:28:32.779 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 16:28:33.123 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-03-01 16:30:51.755 [main] INFO  com.daoki.basic.MainApplicationTests - Starting MainApplicationTests on zlldeMacBook-Pro.local with PID 35738 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 16:30:51.758 [main] INFO  com.daoki.basic.MainApplicationTests - The following profiles are active: test
+2022-03-01 16:30:52.532 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 16:30:52.612 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72ms. Found 2 MongoDB repository interfaces.
+2022-03-01 16:30:53.662 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 16:30:53.737 [cluster-ClusterId{value='621dd9bdfbe4e253ac85ec3b', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:5}] to 127.0.0.1:27017
+2022-03-01 16:30:53.743 [cluster-ClusterId{value='621dd9bdfbe4e253ac85ec3b', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3114101}
+2022-03-01 16:30:53.978 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:6}] to 127.0.0.1:27017
+2022-03-01 16:30:54.342 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-01 16:30:54.732 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:30:54.959 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-01 16:30:54.985 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-01 16:30:55.013 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-01 16:30:55.031 [main] INFO  com.daoki.basic.MainApplicationTests - Started MainApplicationTests in 23.717 seconds (JVM running for 24.464)
+2022-03-01 16:30:55.279 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:30:55.282 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:6}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-01 16:31:22.799 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 35751 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 16:31:22.800 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 16:31:23.471 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 16:31:23.542 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66ms. Found 2 MongoDB repository interfaces.
+2022-03-01 16:31:24.445 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 16:31:24.504 [cluster-ClusterId{value='621dd9dc9bca8044f2c8c88c', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:7}] to 127.0.0.1:27017
+2022-03-01 16:31:24.510 [cluster-ClusterId{value='621dd9dc9bca8044f2c8c88c', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3068568}
+2022-03-01 16:31:24.717 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:8}] to 127.0.0.1:27017
+2022-03-01 16:31:25.052 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-01 16:31:25.398 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:31:25.609 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-01 16:31:25.635 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-01 16:31:25.661 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-01 16:31:25.679 [main] INFO  com.daoki.basic.hotTopicsTest - Started contentConvertTest in 23.353 seconds (JVM running for 24.147)
+2022-03-01 16:31:25.837 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:31:25.840 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:8}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-01 16:41:09.701 [main] INFO  com.daoki.basic.hotTopicsTest - Starting contentConvertTest on zlldeMacBook-Pro.local with PID 35837 (started by zll in /Users/zll/IdeaProjects/Daoki_backend)
+2022-03-01 16:41:09.703 [main] INFO  com.daoki.basic.hotTopicsTest - The following profiles are active: test
+2022-03-01 16:41:10.445 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-01 16:41:10.520 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69ms. Found 2 MongoDB repository interfaces.
+2022-03-01 16:41:11.441 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-01 16:41:11.501 [cluster-ClusterId{value='621ddc270217c33f2fae1f34', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:9}] to 127.0.0.1:27017
+2022-03-01 16:41:11.508 [cluster-ClusterId{value='621ddc270217c33f2fae1f34', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3011417}
+2022-03-01 16:41:11.803 [main] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:10}] to 127.0.0.1:27017
+2022-03-01 16:41:12.300 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-01 16:41:12.669 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:41:12.907 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-03-01 16:41:12.930 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-03-01 16:41:12.960 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-03-01 16:41:12.982 [main] INFO  com.daoki.basic.hotTopicsTest - Started contentConvertTest in 23.678 seconds (JVM running for 24.518)
+2022-03-01 16:41:13.164 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-01 16:41:13.169 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:10}] to 127.0.0.1:27017 because the pool has been closed.

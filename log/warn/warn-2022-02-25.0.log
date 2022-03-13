@@ -1,0 +1,10 @@
+2022-02-25 14:10:59.562 [restartedMain] WARN  org.springframework.boot.StartupInfoLogger - InetAddress.getLocalHost().getHostName() took 5003 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2022-02-25 14:11:47.594 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-02-01, method=addUser)]
+2022-02-25 14:12:04.591 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-04-01, method=deleteUser)]
+2022-02-25 14:12:14.999 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:20.716 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:21.681 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:22.328 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:25.380 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:26.413 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
+2022-02-25 14:12:27.121 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [CustomException(code=A-03-01, method=updateUser)]
