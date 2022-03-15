@@ -47,14 +47,14 @@ public class TopicController {
 
     @ApiOperation("delete topic")
     @PostMapping("/delete")
-    public ResultVO deleteTopic(@NotNull @RequestBody DeleteTopicVO deleteTopicVO){
+    public ResultVO deleteTopic(@Validated @RequestBody DeleteTopicVO deleteTopicVO){
         topicService.deleteTopic(deleteTopicVO);
         return ResultVoUtil.success(null,"delete topic successfully");
     }
 
     @ApiOperation("query fuzzily topic by name")
     @GetMapping("/name")
-    public ResultVO getTopicByName(@NotNull @RequestBody FuzzySearchTopicVO fuzzySearchTopicVO){
+    public ResultVO getTopicByName(@Validated @RequestBody FuzzySearchTopicVO fuzzySearchTopicVO){
         return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
     }
 

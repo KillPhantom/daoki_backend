@@ -1,0 +1,112 @@
+2022-03-15 20:11:00.453  WARN 78306 --- [main] o.s.boot.StartupInfoLogger               : InetAddress.getLocalHost().getHostName() took 5006 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2022-03-15 20:11:05.458  INFO 78306 --- [main] com.daoki.basic.MainApplicationTests     : Starting MainApplicationTests on zlldeMacBook-Pro.local with PID 78306 (started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-15 20:11:05.459  INFO 78306 --- [main] com.daoki.basic.MainApplicationTests     : The following profiles are active: test
+2022-03-15 20:11:06.180  INFO 78306 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-15 20:11:06.268  INFO 78306 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81ms. Found 4 MongoDB repository interfaces.
+2022-03-15 20:11:07.035  INFO 78306 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-15 20:11:07.110  INFO 78306 --- [cluster-ClusterId{value='6230825b0010751e469c1627', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:27}] to 127.0.0.1:27017
+2022-03-15 20:11:07.115  INFO 78306 --- [cluster-ClusterId{value='6230825b0010751e469c1627', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3210822}
+2022-03-15 20:11:07.323  WARN 78306 --- [main] .m.c.i.MongoPersistentEntityIndexCreator : Automatic index creation will be disabled by default as of Spring Data MongoDB 3.x.
+	Please use 'MongoMappingContext#setAutoIndexCreation(boolean)' or override 'MongoConfigurationSupport#autoIndexCreation()' to be explicit.
+	However, we recommend setting up indices manually in an application ready block. You may use index derivation there as well.
+
+	> -----------------------------------------------------------------------------------------
+	> @EventListener(ApplicationReadyEvent.class)
+	> public void initIndicesAfterStartup() {
+	>
+	>     IndexOperations indexOps = mongoTemplate.indexOps(DomainType.class);
+	>
+	>     IndexResolver resolver = new MongoPersistentEntityIndexResolver(mongoMappingContext);
+	>     resolver.resolveIndexFor(DomainType.class).forEach(indexOps::ensureIndex);
+	> }
+	> -----------------------------------------------------------------------------------------
+
+2022-03-15 20:11:07.365  INFO 78306 --- [main] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:28}] to 127.0.0.1:27017
+2022-03-15 20:11:08.195  INFO 78306 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-15 20:11:08.543  INFO 78306 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-15 20:11:08.794  INFO 78306 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-03-15 20:11:08.828  INFO 78306 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-03-15 20:11:08.860  INFO 78306 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-03-15 20:11:09.083  INFO 78306 --- [main] com.daoki.basic.MainApplicationTests     : Started MainApplicationTests in 18.962 seconds (JVM running for 19.869)
+2022-03-15 20:11:09.442  INFO 78306 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-15 20:11:09.447  INFO 78306 --- [SpringContextShutdownHook] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:2, serverValue:28}] to 127.0.0.1:27017 because the pool has been closed.
+2022-03-15 20:11:27.536  WARN 78344 --- [restartedMain] o.s.boot.StartupInfoLogger               : InetAddress.getLocalHost().getHostName() took 5005 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2022-03-15 20:11:32.546  INFO 78344 --- [restartedMain] com.daoki.basic.MainApplication          : Starting MainApplication on zlldeMacBook-Pro.local with PID 78344 (/Users/zll/IdeaProjects/daoki_backend/target/classes started by zll in /Users/zll/IdeaProjects/daoki_backend)
+2022-03-15 20:11:32.547  INFO 78344 --- [restartedMain] com.daoki.basic.MainApplication          : The following profiles are active: test
+2022-03-15 20:11:32.588  INFO 78344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-15 20:11:32.588  INFO 78344 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-15 20:11:33.224  INFO 78344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-03-15 20:11:33.276  INFO 78344 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49ms. Found 4 MongoDB repository interfaces.
+2022-03-15 20:11:33.640  INFO 78344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-03-15 20:11:33.647  INFO 78344 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-15 20:11:33.647  INFO 78344 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2022-03-15 20:11:33.705  INFO 78344 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/daoki]  : Initializing Spring embedded WebApplicationContext
+2022-03-15 20:11:33.705  INFO 78344 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1116 ms
+2022-03-15 20:11:33.904  INFO 78344 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2022-03-15 20:11:33.986  INFO 78344 --- [cluster-ClusterId{value='6230827541c8847e3ef26838', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:29}] to 127.0.0.1:27017
+2022-03-15 20:11:33.991  INFO 78344 --- [cluster-ClusterId{value='6230827541c8847e3ef26838', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 11]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2758383}
+2022-03-15 20:11:34.096  INFO 78344 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-03-15 20:11:34.140  WARN 78344 --- [restartedMain] .m.c.i.MongoPersistentEntityIndexCreator : Automatic index creation will be disabled by default as of Spring Data MongoDB 3.x.
+	Please use 'MongoMappingContext#setAutoIndexCreation(boolean)' or override 'MongoConfigurationSupport#autoIndexCreation()' to be explicit.
+	However, we recommend setting up indices manually in an application ready block. You may use index derivation there as well.
+
+	> -----------------------------------------------------------------------------------------
+	> @EventListener(ApplicationReadyEvent.class)
+	> public void initIndicesAfterStartup() {
+	>
+	>     IndexOperations indexOps = mongoTemplate.indexOps(DomainType.class);
+	>
+	>     IndexResolver resolver = new MongoPersistentEntityIndexResolver(mongoMappingContext);
+	>     resolver.resolveIndexFor(DomainType.class).forEach(indexOps::ensureIndex);
+	> }
+	> -----------------------------------------------------------------------------------------
+
+2022-03-15 20:11:34.165  INFO 78344 --- [restartedMain] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:30}] to 127.0.0.1:27017
+2022-03-15 20:11:34.496  INFO 78344 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-03-15 20:11:34.563  INFO 78344 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-15 20:11:34.653  INFO 78344 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-03-15 20:11:34.665  INFO 78344 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-03-15 20:11:34.684  INFO 78344 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-03-15 20:11:34.844  INFO 78344 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/daoki'
+2022-03-15 20:11:34.847  INFO 78344 --- [restartedMain] com.daoki.basic.MainApplication          : Started MainApplication in 17.579 seconds (JVM running for 23.199)
+2022-03-15 20:14:16.660  INFO 78344 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/daoki]  : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-15 20:14:16.662  INFO 78344 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-15 20:14:16.684  INFO 78344 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 21 ms
+2022-03-15 20:14:16.822  INFO 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:14:16.896  INFO 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230831841c8847e3ef2683a
+2022-03-15 20:14:16.897  INFO 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230831841c8847e3ef2683b
+2022-03-15 20:14:16.898  INFO 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230831841c8847e3ef26839>
+2022-03-15 20:14:55.660  INFO 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:14:55.690  INFO 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230833f41c8847e3ef2683e
+2022-03-15 20:14:55.692  INFO 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230833f41c8847e3ef2683f
+2022-03-15 20:14:55.692  INFO 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230833f41c8847e3ef2683d>
+2022-03-15 20:15:14.195  INFO 78344 --- [http-nio-8080-exec-4] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:15:14.202  INFO 78344 --- [http-nio-8080-exec-4] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230835241c8847e3ef26842
+2022-03-15 20:15:14.205  INFO 78344 --- [http-nio-8080-exec-4] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230835241c8847e3ef26843
+2022-03-15 20:15:14.205  INFO 78344 --- [http-nio-8080-exec-4] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230835241c8847e3ef26841>
+2022-03-15 20:15:26.491  INFO 78344 --- [http-nio-8080-exec-5] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:15:26.494  INFO 78344 --- [http-nio-8080-exec-5] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230835e41c8847e3ef26846
+2022-03-15 20:15:26.496  INFO 78344 --- [http-nio-8080-exec-5] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230835e41c8847e3ef26847
+2022-03-15 20:15:26.496  INFO 78344 --- [http-nio-8080-exec-5] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230835e41c8847e3ef26845>
+2022-03-15 20:15:29.387  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:15:29.392  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230836141c8847e3ef2684a
+2022-03-15 20:15:29.395  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230836141c8847e3ef2684b
+2022-03-15 20:15:29.396  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230836141c8847e3ef26849>
+2022-03-15 20:17:25.034  INFO 78344 --- [http-nio-8080-exec-9] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is deleting the topic with id 6230831841c8847e3ef26839>
+2022-03-15 20:17:25.108  INFO 78344 --- [http-nio-8080-exec-9] c.d.basic.service.impl.TopicServiceImpl  : successfully delete the content with id 6230831841c8847e3ef2683a
+2022-03-15 20:17:25.112  INFO 78344 --- [http-nio-8080-exec-9] c.d.basic.service.impl.TopicServiceImpl  : successfully delete the content with id 6230831841c8847e3ef2683b
+2022-03-15 20:17:25.114  INFO 78344 --- [http-nio-8080-exec-9] c.d.basic.service.impl.TopicServiceImpl  : <successfully delete the topic with id 6230831841c8847e3ef26839>
+2022-03-15 20:19:34.202  INFO 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : <searching the topic by id 6230831841c8847e3ef26839>
+2022-03-15 20:19:34.217 ERROR 78344 --- [http-nio-8080-exec-2] c.d.basic.service.impl.TopicServiceImpl  : <Failed to search the topic with id 6230831841c8847e3ef26839>
+2022-03-15 20:19:34.232 ERROR 78344 --- [http-nio-8080-exec-2] c.d.basic.aop.GlobalExceptionHandling    : 位置:getTopic -> 错误信息:failed to find the topic: the topic doesn't exist
+2022-03-15 20:19:34.237  WARN 78344 --- [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [CustomException(code=B-T-04, method=getTopic)]
+2022-03-15 20:20:05.752  INFO 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is updating a new topic with id 6230831841c8847e3ef26839>
+2022-03-15 20:20:05.755 ERROR 78344 --- [http-nio-8080-exec-3] c.d.basic.service.impl.TopicServiceImpl  : <Fail to update the topic with id 6230831841c8847e3ef26839: the topic with id 6230831841c8847e3ef26839 doesn't exist>
+2022-03-15 20:20:05.755 ERROR 78344 --- [http-nio-8080-exec-3] c.d.basic.aop.GlobalExceptionHandling    : 位置:updateTopic -> 错误信息:failed to update topic: the topic doesn't exist
+2022-03-15 20:20:05.757  WARN 78344 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [CustomException(code=B-T-02-01, method=updateTopic)]
+2022-03-15 20:22:53.716  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : <operator zll is creating a new topic>
+2022-03-15 20:22:53.722  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230851d41c8847e3ef2684f
+2022-03-15 20:22:53.723  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : successfully create a new content with id 6230851d41c8847e3ef26850
+2022-03-15 20:22:53.724  INFO 78344 --- [http-nio-8080-exec-6] c.d.basic.service.impl.TopicServiceImpl  : <successfully create a new topic with id 6230851d41c8847e3ef2684e>
+2022-03-15 20:24:46.881  INFO 78344 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-15 20:24:46.906  INFO 78344 --- [SpringContextShutdownHook] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:2, serverValue:30}] to 127.0.0.1:27017 because the pool has been closed.

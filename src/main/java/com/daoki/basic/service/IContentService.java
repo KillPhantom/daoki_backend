@@ -3,6 +3,7 @@ package com.daoki.basic.service;
 import com.daoki.basic.VO.request.CreateContentVO;
 import com.daoki.basic.VO.request.UpdateContentVO;
 import com.daoki.basic.entity.Content;
+import com.daoki.basic.exception.CustomException;
 
 
 /**
@@ -13,7 +14,6 @@ import com.daoki.basic.entity.Content;
 public interface IContentService {
 
     /**
-     * create content
      * Note that the content entity object lack topicId property in the content related service layer,
      * so this property will be set in the topic related service layer
      * @param createContentVO a content module when creating a new topic

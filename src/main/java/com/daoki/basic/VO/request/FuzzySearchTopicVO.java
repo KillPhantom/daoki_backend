@@ -23,12 +23,11 @@ public class FuzzySearchTopicVO {
 
     @ApiModelProperty("page number")
     @NotNull(message = "the page number mustn't be null")
-    private int page;
+    private Integer page;
 
     @ApiModelProperty("page size")
     @NotNull(message = "the page size mustn't be null")
-    @Length(min = 5 , max = 50 , message = "the length of title is limited to 5~50")
-    private int size;
+    private Integer size;
 
     @ApiModelProperty("the key word used for searching")
     @NotNull(message = "the key word mustn't be null")
