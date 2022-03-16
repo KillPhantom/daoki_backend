@@ -5,6 +5,7 @@ import com.daoki.basic.service.IHotTopicService;
 import com.daoki.basic.utils.ResultVoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +26,19 @@ public class HotTopicController {
     @Autowired
     private final IHotTopicService hotTopicService;
 
-    @ApiOperation("get the form of hot topics")
+    @ApiOperation(value = "get the form of hot topics")
     @GetMapping("/HotTopics")
     public ResultVO getHotTopics(){
         return ResultVoUtil.success(hotTopicService.getHotTopics(),"get the form of hot topics successfully");
     }
 
-    @ApiOperation("get a hot topic by topic id")
+    @ApiOperation(value = "get a hot topic by topic id")
     @GetMapping("/HotTopic")
-    public ResultVO getHotTopic(@NotNull @RequestParam String topicId){
+    public ResultVO getHotTopic(
+            @NotNull
+            @ApiParam(name="id",value="topic id",required=true)
+            @RequestParam
+                    String topicId){
         return ResultVoUtil.success(hotTopicService.getHotTopic(topicId),"get hot topic successfully");
     }
 

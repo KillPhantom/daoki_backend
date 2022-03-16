@@ -13,28 +13,28 @@ import java.util.List;
  * Description: the content view object
  */
 @Data
-@ApiModel("content view object")
+@ApiModel(value = "content")
 public class ContentVO {
 
-    @ApiModelProperty("the id of this content module")
+    @ApiModelProperty(value = "the id of this content module")
     private String contentId;
 
-    @ApiModelProperty("the body of this content module")
+    @ApiModelProperty(value = "the body of this content module")
     private String body;
 
-    @ApiModelProperty("the title of this content module")
+    @ApiModelProperty(value = "the title of this content module")
     private String title;
 
-    @ApiModelProperty("the type of this content module")
+    @ApiModelProperty(value = "the type of this content module")
     private Integer type;
 
-    @ApiModelProperty("the contributors of this content module")
+    @ApiModelProperty(value = "the contributors of this content module")
     private List<String> contributors;
 
-    @ApiModelProperty("the last editing time of this content module")
+    @ApiModelProperty(value = "the last editing time of this content module")
     private Date lastEdit;
 
-    @ApiModelProperty("the position of this content module")
+    @ApiModelProperty(value = "the position of this content module")
     private Integer position;
 
 }

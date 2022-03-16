@@ -13,16 +13,16 @@ import javax.validation.constraints.NotNull;
  * Description: the information of the collaborator
  */
 @Data
-@ApiModel("the collaborator information")
+@ApiModel(value = "the collaborator information")
 public class CollaboratorInfoVO {
 
-    @ApiModelProperty("the id of collaborator information in database")
+    @ApiModelProperty(value = "the id of collaborator information in database")
     private String id;
 
-    @ApiModelProperty("the email of collaborator")
+    @ApiModelProperty(value = "the email of collaborator")
     private String email;
 
-    @ApiModelProperty("what can the collaborator do for the project")
+    @ApiModelProperty(value = "what can the collaborator do for the project")
     @NotNull(message = "the description mustn't be null")
     private String description;
 

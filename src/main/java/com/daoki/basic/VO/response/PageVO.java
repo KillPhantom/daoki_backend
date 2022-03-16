@@ -15,7 +15,7 @@ import java.util.List;
  * Description: page view object
  */
 @Data
-@ApiModel("page view object")
+@ApiModel(value = "page view")
 public class PageVO<T> {
 
     @ApiModelProperty(value = "page number")

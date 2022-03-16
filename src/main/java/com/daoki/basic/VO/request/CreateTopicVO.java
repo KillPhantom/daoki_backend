@@ -15,19 +15,19 @@ import java.util.List;
  * Description: this Object is used for creating the user-defined topic
  */
 @Data
-@ApiModel("create a new topic")
+@ApiModel(value = "a new created topic")
 @EqualsAndHashCode(callSuper = false)
 public class CreateTopicVO {
 
-    @ApiModelProperty("the name of topic")
+    @ApiModelProperty(value = "the name of topic")
     @NotNull(message = "the name mustn't be null")
     @Length(min = 1 , max = 30 , message = "the length of name is limited to 1~30")
     private String name;
 
-    @ApiModelProperty("the content modules of topic")
+    @ApiModelProperty(value = "the content modules of topic")
     private List<CreateContentVO> content;
 
-    @ApiModelProperty("the creator of this topic")
+    @ApiModelProperty(value = "the creator of this topic")
     @NotNull(message = "the operator mustn't be null")
     private String operator;
 
