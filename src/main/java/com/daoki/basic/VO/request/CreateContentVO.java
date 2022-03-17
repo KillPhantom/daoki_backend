@@ -16,29 +16,29 @@ import java.util.List;
  * Description: this Object is used for creating the user-defined content
  */
 @Data
-@ApiModel("a content module of topic when creating a new topic")
+@ApiModel(value = "a created content module")
 @EqualsAndHashCode(callSuper = false)
 public class CreateContentVO {
 
-    @ApiModelProperty("the body of a content module")
+    @ApiModelProperty(value = "the body of a content module")
     @Length(min = 1, max = 1000, message = "the length of body is limited to 1~1000")
     private String body;
 
-    @ApiModelProperty("the title of content module")
+    @ApiModelProperty(value = "the title of content module")
     @NotNull(message = "the title mustn't be null")
     @Length(min = 1 , max = 30 , message = "the length of title is limited to 1~30")
     private String title;
 
-    @ApiModelProperty("the type of content module")
+    @ApiModelProperty(value = "the type of content module")
     @NotNull(message = "the type mustn't be null")
     private Integer type;
 
-    @ApiModelProperty("the contributor of content module")
+    @ApiModelProperty(value = "the contributor of content module")
     @NotNull(message = "the contributor mustn't be null")
     @Size(max = 10, message = " The maximum contributor number limit is 10")
     private List<String> contributors;
 
-    @ApiModelProperty("the position of this content module")
+    @ApiModelProperty(value = "the position of this content module")
     @NotNull(message = "the position information mustn't be null")
     private Integer position;
 }

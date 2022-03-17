@@ -11,16 +11,16 @@ import lombok.Data;
  * Description: a element object of form of the topic fuzzy searching results
  */
 @Data
-@ApiModel("element object of form of the topic fuzzy searching results")
+@ApiModel(value = "element object of the fuzzy searching results' form")
 public class FuzzySearchTopicFormVO {
 
-    @ApiModelProperty("the name of topic")
+    @ApiModelProperty(value = "the name of topic")
     private String title;
 
-    @ApiModelProperty("the link of topic")
+    @ApiModelProperty(value = "the link of topic")
     private String link;
 
-    @ApiModelProperty("the description of topic")
+    @ApiModelProperty(value = "the description of topic")
     private String description;
 
 }

@@ -16,15 +16,15 @@ import java.util.List;
  * Description: this Object is used for deleting a topic
  */
 @Data
-@ApiModel("delete a topic")
+@ApiModel(value = "a deleted topic")
 @EqualsAndHashCode(callSuper = false)
 public class DeleteTopicVO {
 
-    @ApiModelProperty("the id of topic")
+    @ApiModelProperty(value = "the id of topic")
     @NotNull(message = "the topic id in database mustn't be null")
     private String topicId;
 
-    @ApiModelProperty("the operator of deleting this topic")
+    @ApiModelProperty(value = "the operator of deleting this topic")
     @NotNull(message = "the operator mustn't be null")
     private String operator;
 

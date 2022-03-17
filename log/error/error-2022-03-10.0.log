@@ -1,2 +1,0 @@
-2022-03-10 16:42:36.933 [http-nio-8080-exec-3] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateTopic -> 错误信息:failed to update topic: the topic dont exist
-2022-03-10 16:43:38.710 [http-nio-8080-exec-5] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateTopic -> 错误信息:failed to update topic: the topic id in content is mismatched

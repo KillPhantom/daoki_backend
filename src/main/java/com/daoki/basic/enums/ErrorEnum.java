@@ -32,7 +32,22 @@ public enum ErrorEnum {
     /**
      * parameter with wrong format
      */
-    FORMAT_ERROR("B-01", "parameter with wrong format"),
+    FORMAT_ERROR("B-P-01", "parameter with wrong format"),
+
+    /**
+     * email with wrong format
+     */
+    FORMAT_ERROR_EMAIL("B-P-01-01", "email with wrong format"),
+
+    /**
+     * parameter with mismatch type
+     */
+    ARGUMENT_TYPE_MISMATCH("B-P-02", "parameter with mismatch type"),
+
+    /**
+     * failed to get collaborator information
+     */
+    GET_COLLABORATORINFO_ERROR("B-C-01", "failed to find the collaborator information: doesn't exist"),
 
     /**
      * failed to create a new topic
@@ -40,24 +55,34 @@ public enum ErrorEnum {
     CREATE_TOPIC_ERROR("B-T-01", "failed to create a new topic"),
 
     /**
-     * failed to update topic: the topic dont exist
+     * failed to update topic
      */
-    UPDATE_TOPIC_ERROR_NONEXIST("B-T-02-01", "failed to update topic: the topic dont exist"),
+    UPDATE_TOPIC_ERROR("B-T-02", "failed to update topic"),
+
+    /**
+     * failed to update topic: the topic doesn't exist
+     */
+    UPDATE_TOPIC_ERROR_TOPIC_NONEXIST("B-T-02-01", "failed to update topic: the topic doesn't exist"),
+
+    /**
+     * failed to update topic: one updated content doesn't exist
+     */
+    UPDATE_TOPIC_ERROR_CONTENT_NONEXIST("B-T-02-02", "failed to update topic: one updated content doesn't exist"),
 
     /**
      * failed to update topic: the topic id in content is mismatched
      */
-    UPDATE_TOPIC_ERROR_MISMATCH("B-T-02-02", "failed to update topic: the topic id in content is mismatched"),
+    UPDATE_TOPIC_ERROR_TOPICID_MISMATCH("B-T-02-03", "failed to update topic: the topic id in content is mismatched"),
 
     /**
-     * failed to delete topic: the topic dont exist
+     * failed to delete topic: the topic doesn't exist
      */
-    DELETE_TOPIC_ERROR("B-T-03", "failed to delete topic: the topic dont exist"),
+    DELETE_TOPIC_ERROR("B-T-03", "failed to delete topic: the topic doesn't exist"),
 
     /**
-     * failed to find the topic: the topic dont exist
+     * failed to find the topic: the topic doesn't exist
      */
-    GET_TOPIC_ERROR("B-T-04", "failed to find the topic: the topic dont exist"),
+    GET_TOPIC_ERROR("B-T-04", "failed to find the topic: the topic doesn't exist"),
 
     /**
      * failed to create a new content
@@ -70,19 +95,14 @@ public enum ErrorEnum {
     UPDATE_CONTENT_ERROR("B-C-02", "failed to update content"),
 
     /**
-     * failed to delete content: the content dont exist
+     * failed to delete content: the content doesn't exist
      */
-    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content: the content dont exist"),
+    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content: the content doesn't exist"),
 
     /**
      * failed to find content
      */
-    GET_CONTENT_ERROR("B-C-04", "failed to find content"),
-
-    /**
-     * parameter with mismatch type
-     */
-    ARGUMENT_TYPE_MISMATCH("B-06", "parameter with mismatch type"),;
+    GET_CONTENT_ERROR("B-C-04", "failed to find content"),;
 
     /**
      * enum code

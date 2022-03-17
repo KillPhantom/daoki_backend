@@ -1,13 +1,16 @@
 package com.daoki.basic.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.daoki.basic.VO.request.CreateContentVO;
 import com.daoki.basic.VO.request.UpdateContentVO;
 import com.daoki.basic.entity.Content;
+import com.daoki.basic.enums.ContentStatusEnum;
 import com.daoki.basic.enums.ErrorEnum;
 import com.daoki.basic.exception.CustomException;
 import com.daoki.basic.mapper.ContentConvert;
 import com.daoki.basic.repository.ContentRepository;
 import com.daoki.basic.service.IContentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,7 @@ import java.util.Objects;
  * 2022-03-06
  * Description: the implement of the content related service layer interface
  */
+@Slf4j
 @Service
 public class ContentServiceImpl implements IContentService {
 
@@ -36,6 +40,7 @@ public class ContentServiceImpl implements IContentService {
         Content content = ContentConvert.INSTANCE.createVo2Do(createContentVO);
         content.setGmtCreate(new Date());
         content.setLastEdit(new Date());
+        content.setStatus(ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode());
         return content;
     }
 
@@ -44,26 +49,19 @@ public class ContentServiceImpl implements IContentService {
      */
     @Override
     public void updateContent(UpdateContentVO updateContentVO) {
-        Content content = ContentConvert.INSTANCE.updateVo2Do(updateContentVO);
-        // if the updated content contain the content id, the content already exist in database
-        if (Objects.nonNull(updateContentVO.getContentId())){
-            content.setId(updateContentVO.getContentId());
-        }
-        // if the updated content dont contain the content id, the content need be created
-        else {
-            content.setGmtCreate(new Date());
-        }
-        content.setLastEdit(new Date());
-        contentRepository.save(content);
+        Content content = contentRepository.findContentById(updateContentVO.getContentId());
+        Content contentSave = ContentConvert.INSTANCE.updateVo2Do(updateContentVO);
+        contentSave.setGmtCreate(content.getGmtCreate());
+        contentSave.setLastEdit(new Date());
+        contentSave.setStatus(content.getStatus());
+        contentRepository.save(contentSave);
     }
 
     @Override
     public void deleteContent(String contentId) {
-        // if the content with this content id cannot be found in database, an error will be thrown
-        if(Objects.isNull(
-                contentRepository.findContentById(contentId))){
-            throw new CustomException(ErrorEnum.DELETE_CONTENT_ERROR, "deleteContent");
-        }
-        contentRepository.deleteContentById(contentId);
+        Content content = contentRepository.findContentById(contentId);
+        content.setStatus(ContentStatusEnum.STATUS_CONTENT_DELETED.getCode());
+        contentRepository.save(content);
     }
+
 }

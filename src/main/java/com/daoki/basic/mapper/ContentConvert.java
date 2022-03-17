@@ -25,8 +25,8 @@ public interface ContentConvert {
      * @return incomplete content do which will be completed in service layer
      */
     @Mappings({
-            @Mapping(target = "id", ignore = true),
             @Mapping(target = "topicId", ignore = true),
+            @Mapping(target = "id", ignore = true),
             @Mapping(target = "lastEdit", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
@@ -42,11 +42,11 @@ public interface ContentConvert {
      * @return incomplete content do which will be completed in service layer
      */
     @Mappings({
+            @Mapping(target = "id", source = "contentId"),
             @Mapping(target = "lastEdit", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
             @Mapping(target = "extra", ignore = true)
-
     })
     Content updateVo2Do(UpdateContentVO updateContentVO);
 

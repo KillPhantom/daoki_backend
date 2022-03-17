@@ -1,9 +1,0 @@
-2022-02-25 14:11:47.588 [http-nio-8080-exec-3] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:addUser -> 错误信息:添加失败：该用户名的用户已存在
-2022-02-25 14:12:04.589 [http-nio-8080-exec-5] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:deleteUser -> 错误信息:删除失败：该用户名的用户不存在
-2022-02-25 14:12:14.998 [http-nio-8080-exec-6] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:20.715 [http-nio-8080-exec-7] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:21.679 [http-nio-8080-exec-8] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:22.327 [http-nio-8080-exec-9] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:25.379 [http-nio-8080-exec-10] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:26.412 [http-nio-8080-exec-1] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在
-2022-02-25 14:12:27.120 [http-nio-8080-exec-2] ERROR com.daoki.basic.aop.GlobalExceptionHandling - 位置:updateUser -> 错误信息:更新失败：该用户名的用户不存在

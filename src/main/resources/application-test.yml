@@ -13,3 +13,10 @@ spring:
     mongodb:
       database: daoki
       uri: mongodb://127.0.0.1:27017
+
+logging:
+  level:
+    com.imooc.coupon: debug
+  file:
+    path: /Users/zll/IdeaProjects/log/daoki_log
+    name: ${logging.file.path}/daoki_log_test.log

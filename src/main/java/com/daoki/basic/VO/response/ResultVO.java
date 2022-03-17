@@ -13,16 +13,16 @@ import lombok.Data;
  * Description: 固定返回格式
  */
 @Data
-@ApiModel("response with certain format")
+@ApiModel(value = "response with certain format")
 public class ResultVO {
 
-    @ApiModelProperty("status code")
+    @ApiModelProperty(value = "status code")
     private String code;
 
-    @ApiModelProperty("message")
+    @ApiModelProperty(value = "message")
     private String message;
 
-    @ApiModelProperty("response data")
+    @ApiModelProperty(value = "response data")
     private Object data;
 
 }
