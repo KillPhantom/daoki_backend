@@ -21,9 +21,9 @@ import javax.validation.constraints.NotNull;
  * Description: topic related controller layer
  */
 @RestController
-@Api(tags = "topic")
+@Api(tags = "Topic Related API")
 @AllArgsConstructor
-@RequestMapping("/Topic Related API")
+@RequestMapping("/topic")
 public class TopicController {
     @Autowired
     private final ITopicService topicService;
