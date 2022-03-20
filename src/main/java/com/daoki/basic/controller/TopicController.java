@@ -7,10 +7,7 @@ import com.daoki.basic.VO.request.UpdateTopicVO;
 import com.daoki.basic.VO.response.ResultVO;
 import com.daoki.basic.service.ITopicService;
 import com.daoki.basic.utils.ResultVoUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -26,41 +23,61 @@ import javax.validation.constraints.NotNull;
 @RestController
 @Api(tags = "topic")
 @AllArgsConstructor
-@RequestMapping("/topic")
+@RequestMapping("/Topic Related API")
 public class TopicController {
     @Autowired
     private final ITopicService topicService;
 
-    @ApiOperation("create a new topic")
+    @ApiOperation(value = "create a new topic")
     @PostMapping("/create")
-    public ResultVO createTopic(@Validated @RequestBody CreateTopicVO createTopicVO){
+    public ResultVO createTopic(
+            @Validated
+            @ApiParam(name="createdTopic",value="a new created topic",required=true)
+            @RequestBody
+                    CreateTopicVO createTopicVO){
         topicService.createTopic(createTopicVO);
         return ResultVoUtil.success(null,"create topic successfully");
     }
 
-    @ApiOperation("update topic")
+    @ApiOperation(value = "update topic")
     @PostMapping("/update")
-    public ResultVO updateTopic(@Validated @RequestBody UpdateTopicVO updateTopicVO){
+    public ResultVO updateTopic(
+            @Validated
+            @ApiParam(name="updatedTopic",value="a updated topic",required=true)
+            @RequestBody
+                    UpdateTopicVO updateTopicVO){
         topicService.updateTopic(updateTopicVO);
         return ResultVoUtil.success(null,"update topic successfully");
     }
 
-    @ApiOperation("delete topic")
+    @ApiOperation(value = "delete topic")
     @PostMapping("/delete")
-    public ResultVO deleteTopic(@Validated @RequestBody DeleteTopicVO deleteTopicVO){
+    public ResultVO deleteTopic(
+            @Validated
+            @ApiParam(name="deletedTopic",value="a object with topic id and operator",required=true)
+            @RequestBody
+                    DeleteTopicVO deleteTopicVO){
         topicService.deleteTopic(deleteTopicVO);
         return ResultVoUtil.success(null,"delete topic successfully");
     }
 
-    @ApiOperation("query fuzzily topic by name")
+    @ApiOperation(value = "query fuzzily topic by name")
     @GetMapping("/name")
-    public ResultVO getTopicByName(@Validated @RequestBody FuzzySearchTopicVO fuzzySearchTopicVO){
+    public ResultVO getTopicByName(
+            @Validated
+            @ApiParam(name="fuzzySearchedTopic",value="a object with keyword and page information",required=true)
+            @RequestBody
+                    FuzzySearchTopicVO fuzzySearchTopicVO){
         return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
     }
 
-    @ApiOperation("query topic by topic id")
+    @ApiOperation(value = "query topic by topic id")
     @GetMapping("/id")
-    public ResultVO getTopicById(@NotNull @RequestParam String id){
+    public ResultVO getTopicById(
+            @NotNull
+            @ApiParam(name="id",value="topic id",required=true)
+            @RequestParam
+                    String id){
         return ResultVoUtil.success(topicService.getTopicById(id),"get topic successfully");
     }
 

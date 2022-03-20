@@ -12,19 +12,19 @@ import java.util.List;
  * Description: the topic view object
  */
 @Data
-@ApiModel("topic view object")
+@ApiModel(value = "topic")
 public class TopicVO {
 
-    @ApiModelProperty("the id of this topic")
+    @ApiModelProperty(value = "the id of this topic")
     private String topicId;
 
-    @ApiModelProperty("the name of this topic")
+    @ApiModelProperty(value = "the name of this topic")
     private String name;
 
-    @ApiModelProperty("the content modules of this topic")
+    @ApiModelProperty(value = "the content modules of this topic")
     private List<ContentVO> content;
 
-    @ApiModelProperty("the view count of this topic")
+    @ApiModelProperty(value = "the view count of this topic")
     private String viewCount;
 
 }

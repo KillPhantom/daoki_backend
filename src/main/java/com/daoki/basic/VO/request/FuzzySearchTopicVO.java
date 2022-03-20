@@ -17,19 +17,19 @@ import java.util.List;
  * Description: a vo for fuzzily searching topics by key word
  */
 @Data
-@ApiModel("fuzzily search topics by key word")
+@ApiModel(value = "a object with keyword and page information for fuzzily searching")
 @EqualsAndHashCode(callSuper = false)
 public class FuzzySearchTopicVO {
 
-    @ApiModelProperty("page number")
+    @ApiModelProperty(value = "page number")
     @NotNull(message = "the page number mustn't be null")
     private Integer page;
 
-    @ApiModelProperty("page size")
+    @ApiModelProperty(value = "page size")
     @NotNull(message = "the page size mustn't be null")
     private Integer size;
 
-    @ApiModelProperty("the key word used for searching")
+    @ApiModelProperty(value = "the key word used for searching")
     @NotNull(message = "the key word mustn't be null")
     private String keyword;
 

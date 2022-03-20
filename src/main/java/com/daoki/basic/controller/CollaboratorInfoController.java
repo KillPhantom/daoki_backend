@@ -5,13 +5,11 @@ import com.daoki.basic.VO.response.ResultVO;
 import com.daoki.basic.service.ICollaboratorInfoService;
 import com.daoki.basic.utils.ResultVoUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Alan
@@ -27,8 +25,12 @@ public class CollaboratorInfoController {
     @Autowired
     private final ICollaboratorInfoService collaboratorInfoService;
 
-    @PostMapping("/create")
-    public ResultVO createCollaboratorInfo(@Validated @RequestBody CreateCollaboratorInfoVO createCollaboratorInfoVO){
+    @PostMapping(value = "/create a new collaborator information")
+    public ResultVO createCollaboratorInfo(
+            @Validated
+            @ApiParam(name="createdCollaboratorInfo",value="a created collaborator information",required=true)
+            @RequestBody
+                    CreateCollaboratorInfoVO createCollaboratorInfoVO){
         collaboratorInfoService.createCollaboratorInfo(createCollaboratorInfoVO);
         return ResultVoUtil.success(null, "create collaborator information successfully");
     }
