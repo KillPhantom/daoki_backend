@@ -8,8 +8,8 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-20T14:36:40+0800",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_211 (Oracle Corporation)"
+    date = "2022-04-07T23:16:42+0800",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 public class TopicConvertImpl implements TopicConvert {
 
