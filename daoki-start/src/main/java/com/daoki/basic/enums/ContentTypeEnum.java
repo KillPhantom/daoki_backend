@@ -15,27 +15,27 @@ public enum ContentTypeEnum {
     /**
      * CODE
      */
-    TYPE_CONTENT_CODE(1,"CODE"),
+    TYPE_CONTENT_RICH_TEXT(1,"CODE"),
 
-    /**
-     * HTML_LINK
-     */
-    TYPE_CONTENT_HTML_LINK(2,"HTML_LINK"),
-
-    /**
-     * IMAGE
-     */
-    TYPE_CONTENT_IMAGE(3,"IMAGE"),
+//    /**
+//     * HTML_LINK
+//     */
+//    TYPE_CONTENT_HTML_LINK(2,"HTML_LINK"),
+//
+//    /**
+//     * IMAGE
+//     */
+//    TYPE_CONTENT_IMAGE(3,"IMAGE"),
 
     /**
      * TWITTER_LINK
      */
-    TYPE_CONTENT_TWITTER_LINK(4,"TWITTER_LINK"),
+    TYPE_CONTENT_TWITTER_LINK(2,"TWITTER_LINK"),
 
     /**
      * RICH_TEXT
      */
-    TYPE_CONTENT_RICH_TEXT(5,"RICH_TEXT"),;
+    TYPE_CONTENT_CODE(3,"RICH_TEXT"),;
 
     /**
      * enum code

@@ -7,9 +7,6 @@ import com.daoki.basic.VO.request.UpdateTopicVO;
 import com.daoki.basic.VO.response.FuzzySearchTopicFormVO;
 import com.daoki.basic.VO.response.PageVO;
 import com.daoki.basic.VO.response.TopicVO;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 /**
  * @author Alan
@@ -22,7 +19,7 @@ public interface ITopicService {
      * create topic
      * @param createTopicVO a topic when creating a new topic
      */
-    void createTopic(CreateTopicVO createTopicVO);
+    String createTopic(CreateTopicVO createTopicVO);
 
     /**
      * update topic

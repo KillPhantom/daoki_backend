@@ -28,6 +28,7 @@ public class TopicController {
     @Autowired
     private final ITopicService topicService;
 
+    @CrossOrigin
     @ApiOperation(value = "create a new topic")
     @PostMapping("/create")
     public ResultVO createTopic(
@@ -35,10 +36,11 @@ public class TopicController {
             @ApiParam(name="createdTopic",value="a new created topic",required=true)
             @RequestBody
                     CreateTopicVO createTopicVO){
-        topicService.createTopic(createTopicVO);
-        return ResultVoUtil.success(null,"create topic successfully");
+        String topicId = topicService.createTopic(createTopicVO);
+        return ResultVoUtil.success(topicId,"create topic successfully");
     }
 
+    @CrossOrigin
     @ApiOperation(value = "update topic")
     @PostMapping("/update")
     public ResultVO updateTopic(
@@ -50,6 +52,7 @@ public class TopicController {
         return ResultVoUtil.success(null,"update topic successfully");
     }
 
+    @CrossOrigin
     @ApiOperation(value = "delete topic")
     @PostMapping("/delete")
     public ResultVO deleteTopic(
@@ -61,6 +64,7 @@ public class TopicController {
         return ResultVoUtil.success(null,"delete topic successfully");
     }
 
+    @CrossOrigin
     @ApiOperation(value = "query fuzzily topic by name")
     @GetMapping("/name")
     public ResultVO getTopicByName(
@@ -71,6 +75,7 @@ public class TopicController {
         return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
     }
 
+    @CrossOrigin
     @ApiOperation(value = "query topic by topic id")
     @GetMapping("/id")
     public ResultVO getTopicById(
