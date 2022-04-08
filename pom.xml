@@ -9,6 +9,8 @@
         <module>daoki-interface</module>
         <module>daoki-application</module>
         <module>daoki-start</module>
+        <module>daoki-interface/daoki-http</module>
+        <module>daoki-common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -133,17 +135,18 @@
             <version>${mapstruct.version}</version>
         </dependency>
 
+
     </dependencies>
 
-    <build>
-        <finalName>BasicProject</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <finalName>BasicProject</finalName>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
     <!--  配置环境  -->
     <profiles>
