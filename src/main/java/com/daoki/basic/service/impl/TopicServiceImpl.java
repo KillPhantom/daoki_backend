@@ -29,7 +29,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -61,7 +64,7 @@ public class TopicServiceImpl implements ITopicService {
      * @param createTopicVO a topic when creating a new topic
      */
     @Override
-    public void createTopic(CreateTopicVO createTopicVO) {
+    public String createTopic(CreateTopicVO createTopicVO) {
         log.info("<operator {} is creating a new topic>",
                 createTopicVO.getOperator());
         Topic topic = TopicConvert.INSTANCE.createVo2Do(createTopicVO);
@@ -89,6 +92,7 @@ public class TopicServiceImpl implements ITopicService {
         operateHistory.setTime(new Date());
         operateHistory.setTopicId(topicSave.getId());
         operateHistoryRepository.save(operateHistory);
+        return topicSave.getId();
     }
 
     /**
