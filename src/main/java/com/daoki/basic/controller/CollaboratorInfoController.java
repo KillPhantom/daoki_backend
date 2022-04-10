@@ -25,6 +25,7 @@ public class CollaboratorInfoController {
     @Autowired
     private final ICollaboratorInfoService collaboratorInfoService;
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @PostMapping(value = "/submit-info")
     public ResultVO createCollaboratorInfo(
             @Validated

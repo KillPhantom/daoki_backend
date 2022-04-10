@@ -73,8 +73,7 @@ public class LoginAspect {
         if (token == null) {
             throw new CustomException(ErrorEnum.AUTHENTICATION_FAILED,"鉴权失败");
         }
-        // 获取 token 中的 user id
-        String userId;
+
         UserVO verify = jwtUtils.verify(token);
         if (verify == null) {
             throw new CustomException(ErrorEnum.AUTHENTICATION_FAILED,"鉴权失败");

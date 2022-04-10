@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     IUserService userService;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "create user")
     @PostMapping("create-user")
     @PassToken
@@ -33,12 +33,14 @@ public class UserController {
         return ResultVoUtil.success(user, "create user successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @PostMapping("get-user-info")
     public ResultVO getUserInfo(@RequestBody FindUserVO findUserVO) {
         UserVO user = userService.getUserInfo(findUserVO);
         return ResultVoUtil.success(user, "find user successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @PostMapping("authentication")
     @PassToken
     public ResultVO userAuthentication(@RequestBody UserAuthenticationVO userAuthenticationVO) {

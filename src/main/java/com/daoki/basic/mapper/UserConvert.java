@@ -12,4 +12,6 @@ public interface UserConvert {
 
     UserVO user2VO(User user);
 
+    User  VO2User(UserVO userVO);
+
 }

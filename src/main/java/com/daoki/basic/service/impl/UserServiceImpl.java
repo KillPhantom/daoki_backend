@@ -98,6 +98,10 @@ public class UserServiceImpl implements IUserService {
         // debug 用，不去做校验。
         String token = jwtUtils.createToken(userInfo.getUserId().toString(), userInfo.getUserName());
         if (!DebugSwitchs.doWeb3Check) {
+            // 更新random
+            Random u = new Random();
+            userInfo.setNonce(String.valueOf(u.nextInt()));
+            userRepository.save(UserConvert.INSTANCE.VO2User(userInfo));
             // 认证成功，返回session
             resultVO.setToken(token);
             resultVO.setStatus(Boolean.TRUE);
@@ -145,6 +149,10 @@ public class UserServiceImpl implements IUserService {
         }
 
         if (match) {
+            // 更新random
+            Random u = new Random();
+            userInfo.setNonce(String.valueOf(u.nextInt()));
+            userRepository.save(UserConvert.INSTANCE.VO2User(userInfo));
             // 认证成功，返回session
             resultVO.setToken(token);
             resultVO.setStatus(Boolean.TRUE);
