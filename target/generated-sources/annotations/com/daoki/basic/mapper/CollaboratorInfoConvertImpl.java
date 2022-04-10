@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-04-07T23:16:42+0800",
+    date = "2022-04-10T15:12:12+0800",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 public class CollaboratorInfoConvertImpl implements CollaboratorInfoConvert {
