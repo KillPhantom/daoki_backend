@@ -20,3 +20,6 @@ logging:
   file:
     path: /Users/zll/IdeaProjects/log/daoki_log
     name: ${logging.file.path}/daoki_log_test.log
+
+login:
+  key: daoki_backend

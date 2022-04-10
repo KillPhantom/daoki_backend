@@ -36,6 +36,7 @@ public class TopicController {
             @ApiParam(name="createdTopic",value="a new created topic",required=true)
             @RequestBody
                     CreateTopicVO createTopicVO){
+
         String topicId = topicService.createTopic(createTopicVO);
         return ResultVoUtil.success(topicId,"create topic successfully");
     }

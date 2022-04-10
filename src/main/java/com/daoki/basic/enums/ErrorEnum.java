@@ -102,7 +102,15 @@ public enum ErrorEnum {
     /**
      * failed to find content
      */
-    GET_CONTENT_ERROR("B-C-04", "failed to find content"),;
+    GET_CONTENT_ERROR("B-C-04", "failed to find content"),
+
+    // User 相关
+
+    USER_ALREADY_EXIST("B-U-01","user already exist"),
+
+    AUTHENTICATION_FAILED("B-U-02","AUTHENTICATION_FAILED"),
+
+    ;
 
     /**
      * enum code
