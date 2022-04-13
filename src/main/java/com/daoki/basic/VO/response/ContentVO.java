@@ -1,5 +1,6 @@
 package com.daoki.basic.VO.response;
 
+import com.daoki.basic.VO.response.user.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,8 +29,8 @@ public class ContentVO {
     @ApiModelProperty(value = "the type of this content module")
     private Integer type;
 
-    @ApiModelProperty(value = "the contributors of this content module")
-    private List<String> contributors;
+    @ApiModelProperty(value = "the contributors' names of this content module")
+    private List<UserVO> contributors;
 
     @ApiModelProperty(value = "the last editing time of this content module")
     private Date lastEdit;

@@ -24,9 +24,4 @@ public class DeleteTopicVO {
     @NotNull(message = "the topic id in database mustn't be null")
     private String topicId;
 
-    @ApiModelProperty(value = "the operator of deleting this topic")
-    @NotNull(message = "the operator mustn't be null")
-    private String operator;
-
-
 }

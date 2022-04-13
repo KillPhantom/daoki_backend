@@ -50,9 +50,9 @@ public class Content extends BaseDO implements Serializable {
     private int type;
 
     /**
-     * the contributors (userName) of content module
+     * the contributors (user id) of content module
      */
-    private List<String> contributors;
+    private List<Long> contributors;
 
     /**
      * the last editing time of content module

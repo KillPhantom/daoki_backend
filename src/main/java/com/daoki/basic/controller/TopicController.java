@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -28,57 +29,62 @@ public class TopicController {
     @Autowired
     private final ITopicService topicService;
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "create a new topic")
     @PostMapping("/create")
     public ResultVO createTopic(
             @Validated
-            @ApiParam(name="createdTopic",value="a new created topic",required=true)
+            @ApiParam(name = "createdTopic", value = "a new created topic", required = true)
             @RequestBody
-                    CreateTopicVO createTopicVO){
-        topicService.createTopic(createTopicVO);
-        return ResultVoUtil.success(null,"create topic successfully");
+                    CreateTopicVO createTopicVO) {
+        String topicId = topicService.createTopic(createTopicVO);
+        return ResultVoUtil.success(topicId, "create topic successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "update topic")
     @PostMapping("/update")
     public ResultVO updateTopic(
             @Validated
-            @ApiParam(name="updatedTopic",value="a updated topic",required=true)
+            @ApiParam(name = "updatedTopic", value = "a updated topic", required = true)
             @RequestBody
-                    UpdateTopicVO updateTopicVO){
+                    UpdateTopicVO updateTopicVO) {
         topicService.updateTopic(updateTopicVO);
-        return ResultVoUtil.success(null,"update topic successfully");
+        return ResultVoUtil.success(null, "update topic successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "delete topic")
     @PostMapping("/delete")
     public ResultVO deleteTopic(
             @Validated
-            @ApiParam(name="deletedTopic",value="a object with topic id and operator",required=true)
+            @ApiParam(name = "deletedTopic", value = "a object with topic id and operator", required = true)
             @RequestBody
-                    DeleteTopicVO deleteTopicVO){
+                    DeleteTopicVO deleteTopicVO) {
         topicService.deleteTopic(deleteTopicVO);
-        return ResultVoUtil.success(null,"delete topic successfully");
+        return ResultVoUtil.success(null, "delete topic successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "query fuzzily topic by name")
     @GetMapping("/name")
     public ResultVO getTopicByName(
             @Validated
-            @ApiParam(name="fuzzySearchedTopic",value="a object with keyword and page information",required=true)
+            @ApiParam(name = "fuzzySearchedTopic", value = "a object with keyword and page information", required = true)
             @RequestBody
-                    FuzzySearchTopicVO fuzzySearchTopicVO){
-        return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO),"get topic form successfully");
+                    FuzzySearchTopicVO fuzzySearchTopicVO) {
+        return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO), "get topic form successfully");
     }
 
+    @CrossOrigin
     @ApiOperation(value = "query topic by topic id")
     @GetMapping("/id")
     public ResultVO getTopicById(
             @NotNull
-            @ApiParam(name="id",value="topic id",required=true)
+            @ApiParam(name = "id", value = "topic id", required = true)
             @RequestParam
-                    String id){
-        return ResultVoUtil.success(topicService.getTopicById(id),"get topic successfully");
+                    String id) {
+        return ResultVoUtil.success(topicService.getTopicById(id), "get topic successfully");
     }
 
 }

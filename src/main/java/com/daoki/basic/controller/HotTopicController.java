@@ -26,12 +26,14 @@ public class HotTopicController {
     @Autowired
     private final IHotTopicService hotTopicService;
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "get the form of hot topics")
     @GetMapping("/HotTopics")
     public ResultVO getHotTopics(){
         return ResultVoUtil.success(hotTopicService.getHotTopics(),"get the form of hot topics successfully");
     }
 
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "get a hot topic by topic id")
     @GetMapping("/HotTopic")
     public ResultVO getHotTopic(

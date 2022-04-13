@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(tags = "collaborator information")
 @AllArgsConstructor
-@RequestMapping("/collaboratorInfo")
+@RequestMapping("/collaborator")
 public class CollaboratorInfoController {
 
     @Autowired
     private final ICollaboratorInfoService collaboratorInfoService;
 
-    @PostMapping(value = "/create a new collaborator information")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @PostMapping(value = "/submit-info")
     public ResultVO createCollaboratorInfo(
             @Validated
             @ApiParam(name="createdCollaboratorInfo",value="a created collaborator information",required=true)

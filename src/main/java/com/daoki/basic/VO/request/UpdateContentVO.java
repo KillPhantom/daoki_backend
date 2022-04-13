@@ -42,10 +42,10 @@ public class UpdateContentVO {
     @NotNull(message = "the type mustn't be null")
     private Integer type;
 
-    @ApiModelProperty(value = "the contributor of content module")
+    @ApiModelProperty(value = "the contributors' ids of content module")
     @NotNull(message = "the contributor mustn't be null")
     @Size(max = 10, message = " The maximum contributor number limit is 10")
-    private List<String> contributors;
+    private List<Long> contributors;
 
     @ApiModelProperty(value = "the position of this content module")
     @NotNull(message = "the position information mustn't be null")

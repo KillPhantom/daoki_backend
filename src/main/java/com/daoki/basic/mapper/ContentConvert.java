@@ -55,6 +55,9 @@ public interface ContentConvert {
      * @param content content do searched in database
      * @return content vo
      */
-    @Mapping(target = "contentId", source = "id")
+    @Mappings({
+            @Mapping(target = "contentId", source = "id"),
+            @Mapping(target = "contributors", ignore = true)
+    })
     ContentVO do2Vo(Content content);
 }
