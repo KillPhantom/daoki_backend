@@ -4,7 +4,7 @@ import com.daoki.basic.VO.request.user.CreateUserVO;
 import com.daoki.basic.VO.request.user.FindUserVO;
 import com.daoki.basic.VO.request.user.UserAuthenticationVO;
 import com.daoki.basic.VO.response.ResultVO;
-import com.daoki.basic.VO.response.UserVO;
+import com.daoki.basic.VO.response.user.UserVO;
 import com.daoki.basic.VO.response.user.AuthenticationResultVO;
 import com.daoki.basic.anno.PassToken;
 import com.daoki.basic.service.IUserService;
@@ -37,8 +37,8 @@ public class UserController {
     @PostMapping("get-user-info")
     @PassToken
     public ResultVO getUserInfo(@RequestBody FindUserVO findUserVO) {
-        UserVO user = userService.getUserInfo(findUserVO);
-        return ResultVoUtil.success(user, "find user successfully");
+        UserVO userVO = userService.getUserByAddress(findUserVO);
+        return ResultVoUtil.success(userVO, "find user successfully");
     }
 
     @CrossOrigin(origins = "*",maxAge = 3600)

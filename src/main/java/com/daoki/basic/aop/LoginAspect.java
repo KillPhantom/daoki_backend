@@ -1,11 +1,10 @@
 package com.daoki.basic.aop;
 
-import com.daoki.basic.VO.response.UserVO;
+import com.daoki.basic.VO.response.user.UserVO;
 import com.daoki.basic.anno.PassToken;
 import com.daoki.basic.enums.ErrorEnum;
 import com.daoki.basic.exception.CustomException;
 import com.daoki.basic.utils.JwtUtils;
-import com.daoki.basic.utils.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,7 +13,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -48,9 +46,9 @@ public class LoginAspect {
         return joinPoint.proceed();
     }
 
-    private Boolean beforePoint(ProceedingJoinPoint joinPoint) {
-        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+    private void beforePoint(ProceedingJoinPoint joinPoint) {
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert sra != null;
         HttpServletRequest request = sra.getRequest();
 
         // 从 http 请求头中取出 token
@@ -64,10 +62,9 @@ public class LoginAspect {
         if (method.isAnnotationPresent(PassToken.class)) {
             PassToken passToken = method.getAnnotation(PassToken.class);
             if (passToken.required()) {
-                return true;
+                return;
             }
         }
-
 
         // 执行认证
         if (token == null) {
@@ -80,7 +77,6 @@ public class LoginAspect {
         }
 
         request.setAttribute("user", verify);
-        return true;
     }
 
 

@@ -90,14 +90,14 @@ public enum ErrorEnum {
     CREATE_CONTENT_ERROR("B-C-01", "failed to create a new content"),
 
     /**
-     * failed to update content
+     * failed to update content: not one of the contributors, no permission
      */
-    UPDATE_CONTENT_ERROR("B-C-02", "failed to update content"),
+    UPDATE_CONTENT_ERROR("B-C-02", "failed to update content: not one of the contributors, no permission"),
 
     /**
-     * failed to delete content: the content doesn't exist
+     * failed to delete content: not one of the contributors, no permission
      */
-    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content: the content doesn't exist"),
+    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content: not one of the contributors, no permission"),
 
     /**
      * failed to find content
@@ -108,7 +108,9 @@ public enum ErrorEnum {
 
     USER_ALREADY_EXIST("B-U-01","user already exist"),
 
-    AUTHENTICATION_FAILED("B-U-02","AUTHENTICATION_FAILED"),
+    AUTHENTICATION_FAILED("B-U-02","authentication failed"),
+
+    USER_NOT_EXIST("B-U-03","user doesn't exist"),
 
     ;
 

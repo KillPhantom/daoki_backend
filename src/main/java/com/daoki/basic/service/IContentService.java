@@ -2,8 +2,11 @@ package com.daoki.basic.service;
 
 import com.daoki.basic.VO.request.CreateContentVO;
 import com.daoki.basic.VO.request.UpdateContentVO;
+import com.daoki.basic.VO.response.ContentVO;
 import com.daoki.basic.entity.Content;
 import com.daoki.basic.exception.CustomException;
+
+import java.util.List;
 
 
 /**
@@ -32,5 +35,13 @@ public interface IContentService {
      * @param contentId id in database of content
      */
     void deleteContent(String contentId);
+
+    /**
+     * find contents by topicid and content status, and convert the contents to contentVOs
+     * @param topicId topic id in database
+     * @param status topic status
+     * @return list of contentVO
+     */
+    List<ContentVO> getContentsByTopicIdAndStatus(String topicId, String status);
 
 }

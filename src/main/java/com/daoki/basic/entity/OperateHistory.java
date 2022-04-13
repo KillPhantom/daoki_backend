@@ -38,9 +38,9 @@ public class OperateHistory extends BaseDO implements Serializable {
     private Date time;
 
     /**
-     * the operator
+     * the user id of the operator
      */
-    private String operator;
+    private Long operator;
 
     /**
      * the operation action

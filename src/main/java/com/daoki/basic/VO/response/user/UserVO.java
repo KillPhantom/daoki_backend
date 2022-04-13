@@ -1,4 +1,4 @@
-package com.daoki.basic.VO.response;
+package com.daoki.basic.VO.response.user;
 
 import lombok.Data;
 
@@ -18,11 +18,6 @@ public class UserVO {
     /**
      * 钱包hash
      */
-    private String walletHash;
-
-    /**
-     * 噪声
-     */
-    private String nonce;
+    private String walletPublicAddress;
 
 }

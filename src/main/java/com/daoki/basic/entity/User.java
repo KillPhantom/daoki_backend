@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
+/**
+ * @author alan
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document("t_user")
@@ -14,7 +17,6 @@ public class User extends BaseDO implements Serializable {
 
     @Id
     private Long userId;
-
 
     /**
      * 用户名字
@@ -24,10 +26,10 @@ public class User extends BaseDO implements Serializable {
     /**
      * 钱包hash
      */
-    private String walletHash;
+    private String walletPublicAddress;
 
     /**
      * 噪声
      */
-    private String nonce;
+    private String noise;
 }

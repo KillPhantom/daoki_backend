@@ -1,7 +1,6 @@
 package com.daoki.basic.utils;
 
-import com.daoki.basic.VO.response.UserVO;
-import com.daoki.basic.entity.User;
+import com.daoki.basic.VO.response.user.UserVO;
 import com.daoki.basic.service.IUserService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;

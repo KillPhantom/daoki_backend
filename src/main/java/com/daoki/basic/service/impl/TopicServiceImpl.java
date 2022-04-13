@@ -5,9 +5,11 @@ import com.daoki.basic.VO.request.*;
 import com.daoki.basic.VO.response.FuzzySearchTopicFormVO;
 import com.daoki.basic.VO.response.PageVO;
 import com.daoki.basic.VO.response.TopicVO;
+import com.daoki.basic.VO.response.user.UserVO;
 import com.daoki.basic.entity.Content;
 import com.daoki.basic.entity.OperateHistory;
 import com.daoki.basic.entity.Topic;
+import com.daoki.basic.entity.User;
 import com.daoki.basic.enums.ContentStatusEnum;
 import com.daoki.basic.enums.ErrorEnum;
 import com.daoki.basic.enums.TopicOperateEnum;
@@ -28,7 +30,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -65,8 +70,7 @@ public class TopicServiceImpl implements ITopicService {
      */
     @Override
     public String createTopic(CreateTopicVO createTopicVO) {
-        log.info("<operator {} is creating a new topic>",
-                createTopicVO.getOperator());
+        log.info("<operator {} is creating a new topic>", getOperator());
         Topic topic = TopicConvert.INSTANCE.createVo2Do(createTopicVO);
         topic.setGmtCreate(new Date());
         topic.setViewCount(0);
@@ -75,23 +79,18 @@ public class TopicServiceImpl implements ITopicService {
 
         // save the content in the database one by one
         for (CreateContentVO createContentVO : createTopicVO.getContent()){
-            Content content = contentService.createContent(createContentVO);
-            content.setTopicId(topicSave.getId());
-            contentRepository.save(content);
-            log.info("successfully create a new content with id {}",
-                    content.getId());
+            try {
+                Content content = contentService.createContent(createContentVO);
+                content.setTopicId(topicSave.getId());
+                contentRepository.save(content);
+                log.info("successfully create a new content with id {}", content.getId());
+            }catch (CustomException exception){
+                log.info("fail to create a new content: {}", JSON.toJSONString(createContentVO));
+            }
         }
 
-        log.info("<successfully create a new topic with id {}>",
-                topicSave.getId());
-
-        // save the operation history in the database
-        OperateHistory operateHistory = new OperateHistory();
-        operateHistory.setOperator(createTopicVO.getOperator());
-        operateHistory.setAction(TopicOperateEnum.OPERATE_CREATE);
-        operateHistory.setTime(new Date());
-        operateHistory.setTopicId(topicSave.getId());
-        operateHistoryRepository.save(operateHistory);
+        log.info("<successfully create a new topic with id {}>", topicSave.getId());
+        createOperationHistory(TopicOperateEnum.OPERATE_CREATE, topicSave.getId());
         return topicSave.getId();
     }
 
@@ -102,9 +101,7 @@ public class TopicServiceImpl implements ITopicService {
     @Override
     public void updateTopic(UpdateTopicVO updateTopicVO) {
 
-        log.info("<operator {} is updating a new topic with id {}>",
-                updateTopicVO.getOperator(), updateTopicVO.getTopicId());
-
+        log.info("<operator {} is updating a new topic with id {}>", getOperator(), updateTopicVO.getTopicId());
         Topic topic = topicExist(updateTopicVO.getTopicId());
 
         // if the topic with this topic id dont exist, an error will be thrown
@@ -129,8 +126,7 @@ public class TopicServiceImpl implements ITopicService {
                 if (Objects.isNull(
                         contentExist(updateContentVO.getContentId(), updateContentVO.getTopicId())
                 )){
-                    log.error("<Fail to update the topic with id {}: " +
-                                    "the updated content with id {} doesn't exist>",
+                    log.error("<Fail to update the topic with id {}: the updated content with id {} doesn't exist>",
                             updateContentVO.getTopicId(), updateTopicVO.getTopicId());
                     throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_CONTENT_NONEXIST, "updateTopic");
                 }
@@ -148,28 +144,41 @@ public class TopicServiceImpl implements ITopicService {
         for (UpdateContentVO updateContentVO : updateTopicVO.getContent()){
             if (Objects.nonNull(updateContentVO.getContentId())){
                 // get the content ids exist in database but dont exist in updated topic
-                existedContentId.remove(updateContentVO.getContentId());
-                contentService.updateContent(updateContentVO);
-                log.info("successfully update a content with id {}", updateContentVO.getContentId());
+                try{
+                    contentService.updateContent(updateContentVO);
+                    log.info("successfully update a content with id {}", updateContentVO.getContentId());
+                }catch (CustomException exception){
+                    log.info("failed to update a content with id {}", updateContentVO.getContentId());
+                }finally {
+                    existedContentId.remove(updateContentVO.getContentId());
+                }
             }else {
                 log.debug("one updated content in the updated topic without content id");
                 log.info("creating a new content");
-                CreateContentVO createContentVO = new CreateContentVO();
-                BeanUtils.copyProperties(updateContentVO, createContentVO);
-                Content content = contentService.createContent(createContentVO);
-                content.setTopicId(updateTopicVO.getTopicId());
-                contentRepository.save(content);
-                log.info("successfully create a new content with id {}", content.getId());
+                try{
+                    CreateContentVO createContentVO = new CreateContentVO();
+                    BeanUtils.copyProperties(updateContentVO, createContentVO);
+                    Content content = contentService.createContent(createContentVO);
+                    content.setTopicId(updateTopicVO.getTopicId());
+                    contentRepository.save(content);
+                    log.info("successfully create a new content with id {}", content.getId());
+                }catch (CustomException exception){
+                    log.info("fail to create a new content: {}", JSON.toJSONString(updateContentVO));
+                }
             }
         }
 
         // delete the content ids dont exist in updated topic
-        log.debug("the contents in database with ids {} doesn't contained in updated topic, " +
+        log.info("the contents in database with ids {} doesn't contained in updated topic, " +
                 "and these contents will be deleted",
                 JSON.toJSONString(existedContentId));
         for (String deleteContentId : existedContentId){
-            contentService.deleteContent(deleteContentId);
-            log.info("successfully delete the content with content id {}", deleteContentId);
+            try{
+                contentService.deleteContent(deleteContentId);
+                log.info("successfully delete the content with content id {}", deleteContentId);
+            }catch (CustomException exception){
+                log.info("fail to delete the content with content id {}", deleteContentId);
+            }
         }
 
         // replace the original topic with the updated topic
@@ -181,12 +190,7 @@ public class TopicServiceImpl implements ITopicService {
         log.info("<successfully update the topic with id {}>", updateTopicVO.getTopicId());
 
         // save the operation history recording in the database
-        OperateHistory operateHistory = new OperateHistory();
-        operateHistory.setOperator(updateTopicVO.getOperator());
-        operateHistory.setAction(TopicOperateEnum.OPERATE_UPDATE);
-        operateHistory.setTime(new Date());
-        operateHistory.setTopicId(updateTopicVO.getTopicId());
-        operateHistoryRepository.save(operateHistory);
+        createOperationHistory(TopicOperateEnum.OPERATE_UPDATE,updateTopicVO.getTopicId());
     }
 
     /**
@@ -196,8 +200,7 @@ public class TopicServiceImpl implements ITopicService {
     @Override
     public void deleteTopic(DeleteTopicVO deleteTopicVO) {
 
-        log.info("<operator {} is deleting the topic with id {}>",
-                deleteTopicVO.getOperator(), deleteTopicVO.getTopicId());
+        log.info("<operator {} is deleting the topic with id {}>", getOperator(), deleteTopicVO.getTopicId());
 
         Topic topic = topicExist(deleteTopicVO.getTopicId());
 
@@ -209,21 +212,29 @@ public class TopicServiceImpl implements ITopicService {
             throw new CustomException(ErrorEnum.DELETE_TOPIC_ERROR, "deleteTopic");
         }
 
-        for (Content content : contentRepository.findContentsByTopicId(deleteTopicVO.getTopicId())){
-            contentService.deleteContent(content.getId());
-            log.info("successfully delete the content with id {}", content.getId());
+        Boolean isSuccess = true;
+        for (Content content : contentRepository.findContentsByTopicIdAndStatus(
+                deleteTopicVO.getTopicId(),
+                TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode())){
+            try {
+                contentService.deleteContent(content.getId());
+                log.info("successfully delete the content with id {}", content.getId());
+            }catch (CustomException exception){
+                log.error("failed to delete the content with id {}>", content.getId());
+                isSuccess = false;
+            }
         }
 
-        topic.setStatus(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode());
-        topicRepository.save(topic);
-        log.info("<successfully delete the topic with id {}>", deleteTopicVO.getTopicId());
+        if (isSuccess){
+            topic.setStatus(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode());
+            topicRepository.save(topic);
+            log.info("<successfully delete the topic with id {}>", deleteTopicVO.getTopicId());
+            createOperationHistory(TopicOperateEnum.OPERATE_DELETE, deleteTopicVO.getTopicId());
+        }else {
+            log.error("<Failed to delete the topic with id {}>", deleteTopicVO.getTopicId());
+            throw new CustomException(ErrorEnum.DELETE_CONTENT_ERROR, "deleteTopic");
+        }
 
-        OperateHistory operateHistory = new OperateHistory();
-        operateHistory.setOperator(deleteTopicVO.getOperator());
-        operateHistory.setAction(TopicOperateEnum.OPERATE_DELETE);
-        operateHistory.setTime(new Date());
-        operateHistory.setTopicId(deleteTopicVO.getTopicId());
-        operateHistoryRepository.save(operateHistory);
     }
 
     /**
@@ -275,11 +286,12 @@ public class TopicServiceImpl implements ITopicService {
         topicRepository.save(topic);
         TopicVO topicVO = TopicConvert.INSTANCE.do2Vo(topic);
         topicVO.setContent(
-                contentRepository.findContentsByTopicIdAndStatus(
-                        topic.getId(),ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode()
-                ).stream().map(ContentConvert.INSTANCE::do2Vo).collect(Collectors.toList()));
+                contentService.getContentsByTopicIdAndStatus(
+                        topic.getId(),
+                        ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode()
+                ));
         if (Objects.isNull(topicVO.getContent())){
-            log.debug("No content contained in the topic with id {}", id);
+            log.info("No content contained in the topic with id {}", id);
         }
         log.info("<successfully searching the topic with id {}>", id);
         return topicVO;
@@ -312,5 +324,22 @@ public class TopicServiceImpl implements ITopicService {
             return null;
         }
         return content;
+    }
+
+    private Long getOperator(){
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert sra != null;
+        HttpServletRequest request = sra.getRequest();
+        UserVO userVO = (UserVO) request.getAttribute("user");
+        return userVO.getUserId();
+    }
+
+    private void createOperationHistory(TopicOperateEnum topicOperateEnum, String topicId){
+        OperateHistory operateHistory = new OperateHistory();
+        operateHistory.setOperator(getOperator());
+        operateHistory.setAction(topicOperateEnum);
+        operateHistory.setTime(new Date());
+        operateHistory.setTopicId(topicId);
+        operateHistoryRepository.save(operateHistory);
     }
 }
