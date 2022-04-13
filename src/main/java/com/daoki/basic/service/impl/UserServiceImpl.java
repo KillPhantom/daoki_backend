@@ -14,6 +14,7 @@ import com.daoki.basic.service.IUserService;
 import com.daoki.basic.utils.DebugSwitchs;
 import com.daoki.basic.utils.IdGenUtil;
 import com.daoki.basic.utils.JwtUtils;
+import com.daoki.basic.utils.Web3SignatureVerification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     JwtUtils jwtUtils;
 
-    public static final String PERSONAL_MESSAGE_PREFIX = "\u0019Ethereum Signed Message:\n";
+    public static final String PERSONAL_MESSAGE_PREFIX = "Ethereum Signed Message:";
 
 
     @Override
@@ -97,56 +98,26 @@ public class UserServiceImpl implements IUserService {
 
         // debug 用，不去做校验。
         String token = jwtUtils.createToken(userInfo.getUserId().toString(), userInfo.getUserName());
-        if (!DebugSwitchs.doWeb3Check) {
-            // 更新random
-            Random u = new Random();
-            userInfo.setNonce(String.valueOf(u.nextInt()));
-            userRepository.save(UserConvert.INSTANCE.VO2User(userInfo));
-            // 认证成功，返回session
-            resultVO.setToken(token);
-            resultVO.setStatus(Boolean.TRUE);
-            resultVO.setMessage("authentication success.");
-            return resultVO;
-        }
+//        if (!DebugSwitchs.doWeb3Check) {
+//            // 更新random
+//            Random u = new Random();
+//            userInfo.setNonce(String.valueOf(u.nextInt()));
+//            userRepository.save(UserConvert.INSTANCE.VO2User(userInfo));
+//            // 认证成功，返回session
+//            resultVO.setToken(token);
+//            resultVO.setStatus(Boolean.TRUE);
+//            resultVO.setMessage("authentication success.");
+//            return resultVO;
+//        }
         // nonce
-        String message = userInfo.getNonce();
-
-        String prefix = PERSONAL_MESSAGE_PREFIX + message.length();
-        byte[] msgHash = Hash.sha3((prefix + message).getBytes());
-
-        byte[] signatureBytes = Numeric.hexStringToByteArray(userAuthenticationVO.getSignature());
-        byte v = signatureBytes[64];
-        if (v < 27) {
-            v += 27;
-        }
-
-        SignatureData sd =
-                new SignatureData(
-                        v,
-                        (byte[]) Arrays.copyOfRange(signatureBytes, 0, 32),
-                        (byte[]) Arrays.copyOfRange(signatureBytes, 32, 64));
-
-        String addressRecovered = null;
         boolean match = false;
-
-        // Iterate for each possible key to recover
-        for (int i = 0; i < 4; i++) {
-            BigInteger publicKey =
-                    Sign.recoverFromSignature(
-                            (byte) i,
-                            new ECDSASignature(
-                                    new BigInteger(1, sd.getR()), new BigInteger(1, sd.getS())),
-                            msgHash);
-
-            if (publicKey != null) {
-                addressRecovered = "0x" + Keys.getAddress(publicKey);
-
-                if (addressRecovered.equals(address)) {
-                    match = true;
-                    break;
-                }
-            }
+        try{
+            match = Web3SignatureVerification.verify(userAuthenticationVO.getSignature(), address, PERSONAL_MESSAGE_PREFIX + userInfo.getNonce());
+        }catch (Exception e){
+            // TODO @Alan 加一下Api Exception handle 表示签名验证出问题了
+            System.out.println(e.toString());
         }
+
 
         if (match) {
             // 更新random

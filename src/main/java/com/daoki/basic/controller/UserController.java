@@ -35,6 +35,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*",maxAge = 3600)
     @PostMapping("get-user-info")
+    @PassToken
     public ResultVO getUserInfo(@RequestBody FindUserVO findUserVO) {
         UserVO user = userService.getUserInfo(findUserVO);
         return ResultVoUtil.success(user, "find user successfully");
