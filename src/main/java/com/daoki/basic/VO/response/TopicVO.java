@@ -1,5 +1,6 @@
 package com.daoki.basic.VO.response;
 
+import com.daoki.basic.VO.response.user.UserVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,4 +28,12 @@ public class TopicVO {
     @ApiModelProperty(value = "the view count of this topic")
     private String viewCount;
 
+    @ApiModelProperty(value = "the contributor of this topic")
+    private UserVO contributor;
+
+    @ApiModelProperty(value = "the topics quoted by this topic")
+    private List<QuoteTopicVO> quoteTopics;
+
+    @ApiModelProperty(value = "the quoted count")
+    private String quoteIndex;
 }

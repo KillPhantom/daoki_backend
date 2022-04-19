@@ -17,7 +17,7 @@ public interface UserConvert {
     @Mappings({
             @Mapping(target = "userId", ignore = true),
             @Mapping(target = "walletPublicAddress", source = "publicAddress"),
-            @Mapping(target = "noise", ignore = true)
+            @Mapping(target = "nonce", ignore = true)
     })
     User createVo2Do(CreateUserVO createUserVO);
 

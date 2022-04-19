@@ -55,34 +55,74 @@ public enum ErrorEnum {
     CREATE_TOPIC_ERROR("B-T-01", "failed to create a new topic"),
 
     /**
-     * failed to update topic
+     * failed to create a new topic: do not quote repeatedly
      */
-    UPDATE_TOPIC_ERROR("B-T-02", "failed to update topic"),
+    CREATE_TOPIC_ERROR_QUOTE("B-T-01-01","failed to create the topic: do not quote repeatedly"),
+
+    /**
+     * failed to update topic: no permission to update this topic
+     */
+    UPDATE_TOPIC_ERROR_NOPERMISSION("B-T-02-01", "failed to update topic: no permission to update this topic"),
 
     /**
      * failed to update topic: the topic doesn't exist
      */
-    UPDATE_TOPIC_ERROR_TOPIC_NONEXIST("B-T-02-01", "failed to update topic: the topic doesn't exist"),
+    UPDATE_TOPIC_ERROR_NONEXIST("B-T-02-02", "failed to update topic: the topic doesn't exist"),
+
+    /**
+     * failed to update topic: the topic have been deleted
+     */
+    UPDATE_TOPIC_ERROR_DELETED("B-T-02-03", "failed to update topic: the topic have been deleted"),
 
     /**
      * failed to update topic: one updated content doesn't exist
      */
-    UPDATE_TOPIC_ERROR_CONTENT_NONEXIST("B-T-02-02", "failed to update topic: one updated content doesn't exist"),
+    UPDATE_TOPIC_ERROR_CONTENT_NONEXIST("B-T-02-04", "failed to update topic: one updated content doesn't exist"),
 
     /**
      * failed to update topic: the topic id in content is mismatched
      */
-    UPDATE_TOPIC_ERROR_TOPICID_MISMATCH("B-T-02-03", "failed to update topic: the topic id in content is mismatched"),
+    UPDATE_TOPIC_ERROR_TOPICID_MISMATCH("B-T-02-05", "failed to update topic: the topic ids in contents are mismatched"),
+
+    /**
+     * failed to update the topic: do not quote repeatedly
+     */
+    UPDATE_TOPIC_ERROR_QUOTE("B-T-02-06","failed to update the topic: do not quote repeatedly"),
+
+    /**
+     * failed to delete topic: no permission to delete this topic
+     */
+    DELETE_TOPIC_ERROR_NOPERMISSION("B-T-03-01", "failed to delete topic: no permission to delete this topic"),
 
     /**
      * failed to delete topic: the topic doesn't exist
      */
-    DELETE_TOPIC_ERROR("B-T-03", "failed to delete topic: the topic doesn't exist"),
+    DELETE_TOPIC_ERROR_NONEXIST("B-T-03-02", "failed to delete topic: the topic doesn't exist"),
 
     /**
      * failed to find the topic: the topic doesn't exist
      */
-    GET_TOPIC_ERROR("B-T-04", "failed to find the topic: the topic doesn't exist"),
+    GET_TOPIC_ERROR_NONEXIST("B-T-04-01", "failed to find the topic: the topic doesn't exist"),
+
+    /**
+     * failed to find the topic: have been deleted
+     */
+    GET_TOPIC_ERROR_DELETED("B-T-04-02", "failed to find the topic: have been deleted"),
+
+    /**
+     * failed to quote the topic: the quoted topic doesn't exist
+     */
+    QUOTE_TOPIC_ERROR_NONEXIST("B-T-05-01","failed to quote the topic: the quoted topic doesn't exist"),
+
+    /**
+     * failed to quote the topic: do not quote repeatedly
+     */
+    QUOTE_TOPIC_ERROR_REPEAT("B-T-05-02","failed to quote the topic: do not quote repeatedly"),
+
+    /**
+     * failed to quote the topic: the quoted topic have been deleted
+     */
+    QUOTE_TOPIC_ERROR_DELETED("B-T-05-03","failed to quote the topic: the quoted topic have been deleted"),
 
     /**
      * failed to create a new content
@@ -90,14 +130,14 @@ public enum ErrorEnum {
     CREATE_CONTENT_ERROR("B-C-01", "failed to create a new content"),
 
     /**
-     * failed to update content: not one of the contributors, no permission
+     * failed to update content
      */
-    UPDATE_CONTENT_ERROR("B-C-02", "failed to update content: not one of the contributors, no permission"),
+    UPDATE_CONTENT_ERROR("B-C-02", "failed to update content"),
 
     /**
-     * failed to delete content: not one of the contributors, no permission
+     * failed to delete content
      */
-    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content: not one of the contributors, no permission"),
+    DELETE_CONTENT_ERROR("B-C-03", "failed to delete content"),
 
     /**
      * failed to find content

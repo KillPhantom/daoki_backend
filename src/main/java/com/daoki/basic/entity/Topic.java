@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Alan
@@ -52,4 +53,18 @@ public class Topic extends BaseDO implements Serializable {
     @Indexed
     private int viewCount;
 
+    /**
+     * the contributor (user id) of topic
+     */
+    private long contributor;
+
+    /**
+     * the ids of the topics quoted by this topic
+     */
+    private List<String> quoteTopics;
+
+    /**
+     * quoted count
+     */
+    private int quoteIndex;
 }

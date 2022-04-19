@@ -25,15 +25,12 @@ public class CreateContentVO {
     private String body;
 
     @ApiModelProperty(value = "the title of content module")
+    @NotNull(message = "the title mustn't be null")
     private String title;
 
     @ApiModelProperty(value = "the type of content module")
     @NotNull(message = "the type mustn't be null")
     private Integer type;
-
-    @ApiModelProperty(value = "the contributors' ids of content module")
-    @Size(max = 10, message = " The maximum contributor number limit is 10")
-    private List<Long> contributors;
 
     @ApiModelProperty(value = "the position of this content module")
     @NotNull(message = "the position information mustn't be null")
@@ -41,7 +38,5 @@ public class CreateContentVO {
 
     @ApiModelProperty(value = "language for the code data type")
     private String language;
-
-
 
 }

@@ -2,6 +2,7 @@ package com.daoki.basic.mapper;
 
 import com.daoki.basic.VO.request.CreateTopicVO;
 import com.daoki.basic.VO.request.UpdateTopicVO;
+import com.daoki.basic.VO.response.TopicPreviewVO;
 import com.daoki.basic.VO.response.TopicVO;
 import com.daoki.basic.entity.Topic;
 import org.mapstruct.Mapper;
@@ -27,6 +28,7 @@ public interface TopicConvert {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "viewCount", ignore = true),
+            @Mapping(target = "quoteIndex", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
             @Mapping(target = "extra", ignore = true)
@@ -42,6 +44,7 @@ public interface TopicConvert {
     @Mappings({
             @Mapping(target = "id", source = "topicId"),
             @Mapping(target = "viewCount", ignore = true),
+            @Mapping(target = "quoteIndex", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
             @Mapping(target = "extra", ignore = true)
@@ -56,8 +59,18 @@ public interface TopicConvert {
      * @return incomplete topic vo will be completed in service layer
      */
     @Mappings({
+            @Mapping(target = "topicId", source = "id"),
             @Mapping(target = "content", ignore = true),
-            @Mapping(target = "topicId", source = "id")
+            @Mapping(target = "contributor", ignore = true),
+            @Mapping(target = "quoteTopics", ignore = true)
     })
     TopicVO do2Vo(Topic topic);
+
+
+    @Mappings({
+            @Mapping(target = "title", source = "name"),
+            @Mapping(target = "quoteIndex", expression = "java(java.lang.Integer.toString(topic.getQuoteIndex()))")
+    })
+    TopicPreviewVO do2PreviewVo(Topic topic);
+
 }

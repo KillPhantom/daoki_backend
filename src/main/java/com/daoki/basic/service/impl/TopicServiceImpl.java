@@ -2,9 +2,7 @@ package com.daoki.basic.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.daoki.basic.VO.request.*;
-import com.daoki.basic.VO.response.FuzzySearchTopicFormVO;
-import com.daoki.basic.VO.response.PageVO;
-import com.daoki.basic.VO.response.TopicVO;
+import com.daoki.basic.VO.response.*;
 import com.daoki.basic.VO.response.user.UserVO;
 import com.daoki.basic.entity.Content;
 import com.daoki.basic.entity.OperateHistory;
@@ -15,29 +13,28 @@ import com.daoki.basic.enums.ErrorEnum;
 import com.daoki.basic.enums.TopicOperateEnum;
 import com.daoki.basic.enums.TopicStatusEnum;
 import com.daoki.basic.exception.CustomException;
-import com.daoki.basic.mapper.ContentConvert;
 import com.daoki.basic.mapper.TopicConvert;
+import com.daoki.basic.mapper.UserConvert;
 import com.daoki.basic.repository.ContentRepository;
 import com.daoki.basic.repository.OperateHistoryRepository;
 import com.daoki.basic.repository.TopicRepository;
+import com.daoki.basic.repository.UserRepository;
 import com.daoki.basic.service.IContentService;
 import com.daoki.basic.service.ITopicService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -53,6 +50,9 @@ public class TopicServiceImpl implements ITopicService {
     private IContentService contentService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private TopicRepository topicRepository;
 
     @Autowired
@@ -60,6 +60,9 @@ public class TopicServiceImpl implements ITopicService {
 
     @Autowired
     private OperateHistoryRepository operateHistoryRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Value("${daoki.web.hotTopicUrlPre:}${server.servlet.context-path:}")
     private String linkPre;
@@ -70,22 +73,33 @@ public class TopicServiceImpl implements ITopicService {
      */
     @Override
     public String createTopic(CreateTopicVO createTopicVO) {
+
         log.info("<operator {} is creating a new topic>", getOperator());
+
+        isQuotedRight(createTopicVO.getQuoteTopics());
+
         Topic topic = TopicConvert.INSTANCE.createVo2Do(createTopicVO);
         topic.setGmtCreate(new Date());
         topic.setViewCount(0);
         topic.setStatus(TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode());
+        topic.setQuoteIndex(0);
         Topic topicSave = topicRepository.save(topic);
 
+        if(CollectionUtils.isNotEmpty(createTopicVO.getQuoteTopics())){
+            for (String q : createTopicVO.getQuoteTopics()){
+                Topic topicTemp = topicRepository.findTopicById(q);
+                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()+1);
+                topicRepository.save(topicTemp);
+            }
+        }
+
         // save the content in the database one by one
-        for (CreateContentVO createContentVO : createTopicVO.getContent()){
-            try {
+        if(CollectionUtils.isNotEmpty(createTopicVO.getContent())){
+            for (CreateContentVO createContentVO : createTopicVO.getContent()){
                 Content content = contentService.createContent(createContentVO);
                 content.setTopicId(topicSave.getId());
                 contentRepository.save(content);
                 log.info("successfully create a new content with id {}", content.getId());
-            }catch (CustomException exception){
-                log.info("fail to create a new content: {}", JSON.toJSONString(createContentVO));
             }
         }
 
@@ -102,36 +116,54 @@ public class TopicServiceImpl implements ITopicService {
     public void updateTopic(UpdateTopicVO updateTopicVO) {
 
         log.info("<operator {} is updating a new topic with id {}>", getOperator(), updateTopicVO.getTopicId());
-        Topic topic = topicExist(updateTopicVO.getTopicId());
+
+        if (!isPermission(updateTopicVO.getTopicId())){
+            log.error("<Fail to update the topic with id {}: the user {} doesn't have permission>",
+                    updateTopicVO.getTopicId(), getOperator());
+            throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_NOPERMISSION,"updateTopic");
+        }
+
+        Topic topic = topicRepository.findTopicById(updateTopicVO.getTopicId());
 
         // if the topic with this topic id dont exist, an error will be thrown
         if (Objects.isNull(topic)){
             log.error("<Fail to update the topic with id {}: the topic with id {} doesn't exist>",
                     updateTopicVO.getTopicId(), updateTopicVO.getTopicId());
-            throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_TOPIC_NONEXIST, "updateTopic");
+            throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_NONEXIST, "updateTopic");
         }
 
-        for (UpdateContentVO updateContentVO : updateTopicVO.getContent()){
-            // if topic id of any updated content isn't equal to this topic id, an error will be thrown
-            if (!updateContentVO.getTopicId().equals(updateTopicVO.getTopicId())){
-                log.error("<Fail to update the topic with id {}: " +
-                                "the updated content's topic id {} isn't equal to updated topic's topic id {}>",
-                        updateContentVO.getTopicId(), updateTopicVO.getTopicId(), updateTopicVO.getTopicId());
-                throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_TOPICID_MISMATCH, "updateTopic");
-            }
+        if (topic.getStatus().equals(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode())){
+            log.error("<Fail to update the topic with id {}: the topic with id {} have been deleted>",
+                    updateTopicVO.getTopicId(), updateTopicVO.getTopicId());
+            throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_DELETED,"updateTopic");
+        }
 
-            // if the updated content contains the content id, the content already exist
-            if (Objects.nonNull(updateContentVO.getContentId())){
-                // in this case, if the content with this content id and topic id cannot be found, an error will be thrown
-                if (Objects.isNull(
-                        contentExist(updateContentVO.getContentId(), updateContentVO.getTopicId())
-                )){
-                    log.error("<Fail to update the topic with id {}: the updated content with id {} doesn't exist>",
-                            updateContentVO.getTopicId(), updateTopicVO.getTopicId());
-                    throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_CONTENT_NONEXIST, "updateTopic");
+        if (CollectionUtils.isNotEmpty(updateTopicVO.getContent())){
+            for (UpdateContentVO updateContentVO : updateTopicVO.getContent()){
+                // if topic id of any updated content isn't equal to this topic id, an error will be thrown
+                if (!updateContentVO.getTopicId().equals(updateTopicVO.getTopicId())){
+                    log.error("<Fail to update the topic with id {}: " +
+                                    "the updated content's topic id {} isn't equal to updated topic's topic id {}>",
+                            updateContentVO.getTopicId(), updateTopicVO.getTopicId(), updateTopicVO.getTopicId());
+                    throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_TOPICID_MISMATCH, "updateTopic");
+                }
+
+                // if the updated content contains the content id, the content already exist
+                if (Objects.nonNull(updateContentVO.getContentId())){
+                    // in this case, if the content with this content id and topic id cannot be found, an error will be thrown
+                    if (Objects.isNull(
+                            contentExist(updateContentVO.getContentId(), updateContentVO.getTopicId())
+                    )){
+                        log.error("<Fail to update the topic with id {}: the updated content with id {} doesn't exist>",
+                                updateContentVO.getTopicId(), updateTopicVO.getTopicId());
+                        throw new CustomException(ErrorEnum.UPDATE_TOPIC_ERROR_CONTENT_NONEXIST, "updateTopic");
+                    }
                 }
             }
         }
+
+
+        isQuotedRight(updateTopicVO.getQuoteTopics());
 
         // get ids of all contents contained in topic with this topic id in database
         Set<String> existedContentId =
@@ -141,29 +173,20 @@ public class TopicServiceImpl implements ITopicService {
 
         // if the updated content dont contain the content id, the content need be created
         // or the original content will be replaced with the updated content
-        for (UpdateContentVO updateContentVO : updateTopicVO.getContent()){
-            if (Objects.nonNull(updateContentVO.getContentId())){
-                // get the content ids exist in database but dont exist in updated topic
-                try{
+        if (CollectionUtils.isNotEmpty(updateTopicVO.getContent())){
+            for (UpdateContentVO updateContentVO : updateTopicVO.getContent()){
+                if (Objects.nonNull(updateContentVO.getContentId())){
+                    // get the content ids exist in database but dont exist in updated topic
                     contentService.updateContent(updateContentVO);
                     log.info("successfully update a content with id {}", updateContentVO.getContentId());
-                }catch (CustomException exception){
-                    log.info("failed to update a content with id {}", updateContentVO.getContentId());
-                }finally {
                     existedContentId.remove(updateContentVO.getContentId());
-                }
-            }else {
-                log.debug("one updated content in the updated topic without content id");
-                log.info("creating a new content");
-                try{
-                    CreateContentVO createContentVO = new CreateContentVO();
-                    BeanUtils.copyProperties(updateContentVO, createContentVO);
-                    Content content = contentService.createContent(createContentVO);
+                }else {
+                    log.debug("one updated content in the updated topic without content id");
+                    log.info("creating a new content");
+                    Content content = contentService.createContent(updateContentVO);
                     content.setTopicId(updateTopicVO.getTopicId());
                     contentRepository.save(content);
                     log.info("successfully create a new content with id {}", content.getId());
-                }catch (CustomException exception){
-                    log.info("fail to create a new content: {}", JSON.toJSONString(updateContentVO));
                 }
             }
         }
@@ -172,12 +195,10 @@ public class TopicServiceImpl implements ITopicService {
         log.info("the contents in database with ids {} doesn't contained in updated topic, " +
                 "and these contents will be deleted",
                 JSON.toJSONString(existedContentId));
-        for (String deleteContentId : existedContentId){
-            try{
+        if (CollectionUtils.isNotEmpty(existedContentId)){
+            for (String deleteContentId : existedContentId){
                 contentService.deleteContent(deleteContentId);
                 log.info("successfully delete the content with content id {}", deleteContentId);
-            }catch (CustomException exception){
-                log.info("fail to delete the content with content id {}", deleteContentId);
             }
         }
 
@@ -186,7 +207,24 @@ public class TopicServiceImpl implements ITopicService {
         topicSave.setGmtCreate(topic.getGmtCreate());
         topicSave.setViewCount(topic.getViewCount());
         topicSave.setStatus(topic.getStatus());
+        topicSave.setQuoteIndex(topic.getQuoteIndex());
         topicRepository.save(topicSave);
+
+        if (CollectionUtils.isNotEmpty(topic.getQuoteTopics())){
+            for(String q : topic.getQuoteTopics()){
+                Topic topicTemp = topicRepository.findTopicById(q);
+                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()-1);
+                topicRepository.save(topicTemp);
+            }
+        }
+        if (CollectionUtils.isNotEmpty(updateTopicVO.getQuoteTopics())){
+            for(String q : updateTopicVO.getQuoteTopics()){
+                Topic topicTemp = topicRepository.findTopicById(q);
+                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()+1);
+                topicRepository.save(topicTemp);
+            }
+        }
+
         log.info("<successfully update the topic with id {}>", updateTopicVO.getTopicId());
 
         // save the operation history recording in the database
@@ -195,46 +233,57 @@ public class TopicServiceImpl implements ITopicService {
 
     /**
      * delete topic according to topic id
-     * @param deleteTopicVO vo for deleting a topic
+     * @param topicId topic id
      */
     @Override
-    public void deleteTopic(DeleteTopicVO deleteTopicVO) {
+    public void deleteTopic(String topicId) {
 
-        log.info("<operator {} is deleting the topic with id {}>", getOperator(), deleteTopicVO.getTopicId());
+        log.info("<operator {} is deleting the topic with id {}>", getOperator(), topicId);
 
-        Topic topic = topicExist(deleteTopicVO.getTopicId());
+        if (!isPermission(topicId)){
+            log.error("<Fail to delete the topic with id {}: the user {} doesn't have permission>",
+                    topicId, getOperator());
+            throw new CustomException(ErrorEnum.DELETE_TOPIC_ERROR_NOPERMISSION,"deleteTopic");
+        }
+
+        Topic topic = topicRepository.findTopicById(topicId);
 
         // if the topic with this topic id cannot be found, an error will be thrown
         if (Objects.isNull(topic)){
-            log.error("<Fail to delete the topic with id {}: " +
-                            "the deleted topic with id {} doesn't exist>",
-                    deleteTopicVO.getTopicId(), deleteTopicVO.getTopicId());
-            throw new CustomException(ErrorEnum.DELETE_TOPIC_ERROR, "deleteTopic");
+            log.error("<Fail to delete the topic with id {}: the topic doesn't exist>", topicId);
+            throw new CustomException(ErrorEnum.DELETE_TOPIC_ERROR_NONEXIST, "deleteTopic");
         }
 
-        Boolean isSuccess = true;
-        for (Content content : contentRepository.findContentsByTopicIdAndStatus(
-                deleteTopicVO.getTopicId(),
-                TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode())){
-            try {
+        if (topic.getStatus().equals(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode())){
+            return;
+        }
+
+        List<Content> contentList = contentRepository.findContentsByTopicIdAndStatus(
+                topicId, TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode());
+        if (CollectionUtils.isNotEmpty(contentList)){
+            for (Content content : contentList){
                 contentService.deleteContent(content.getId());
                 log.info("successfully delete the content with id {}", content.getId());
-            }catch (CustomException exception){
-                log.error("failed to delete the content with id {}>", content.getId());
-                isSuccess = false;
             }
         }
 
-        if (isSuccess){
-            topic.setStatus(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode());
-            topicRepository.save(topic);
-            log.info("<successfully delete the topic with id {}>", deleteTopicVO.getTopicId());
-            createOperationHistory(TopicOperateEnum.OPERATE_DELETE, deleteTopicVO.getTopicId());
-        }else {
-            log.error("<Failed to delete the topic with id {}>", deleteTopicVO.getTopicId());
-            throw new CustomException(ErrorEnum.DELETE_CONTENT_ERROR, "deleteTopic");
+
+        topic.setStatus(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode());
+        topicRepository.save(topic);
+
+        if (CollectionUtils.isNotEmpty(topic.getQuoteTopics())){
+            for (String q : topic.getQuoteTopics()){
+                Topic topicTemp = topicRepository.findTopicById(q);
+                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()-1);
+                topicRepository.save(topicTemp);
+            }
         }
 
+
+
+        log.info("<successfully delete the topic with id {}>", topicId);
+
+        createOperationHistory(TopicOperateEnum.OPERATE_DELETE, topicId);
     }
 
     /**
@@ -276,39 +325,64 @@ public class TopicServiceImpl implements ITopicService {
     @Override
     public TopicVO getTopicById(String id) {
         log.info("<searching the topic by id {}>", id);
-        Topic topic = topicExist(id);
+        Topic topic = topicRepository.findTopicById(id);
         // if the topic with this topic id cannot be found, an error will be thrown
         if (Objects.isNull(topic)){
-            log.error("<Fail to search the topic with id {}>", id);
-            throw new CustomException(ErrorEnum.GET_TOPIC_ERROR, "getTopic");
+            log.error("<Fail to search the topic with id {}: doesn't exist>", id);
+            throw new CustomException(ErrorEnum.GET_TOPIC_ERROR_NONEXIST, "getTopic");
         }
+        if (topic.getStatus().equals(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode())){
+            log.error("<Fail to search the topic with id {}: have been deleted>", id);
+            throw new CustomException(ErrorEnum.GET_TOPIC_ERROR_DELETED, "getTopic");
+        }
+
         topic.setViewCount(topic.getViewCount() + 1);
         topicRepository.save(topic);
         TopicVO topicVO = TopicConvert.INSTANCE.do2Vo(topic);
-        topicVO.setContent(
-                contentService.getContentsByTopicIdAndStatus(
-                        topic.getId(),
-                        ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode()
-                ));
-        if (Objects.isNull(topicVO.getContent())){
-            log.info("No content contained in the topic with id {}", id);
+        topicVO.setContent(contentService.getContentsByTopicIdAndStatus(
+                topic.getId(),
+                ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode()));
+
+        User user = userRepository.findByUserId(topic.getContributor());
+        UserVO userVO = UserConvert.INSTANCE.Do2Vo(user);
+        topicVO.setContributor(userVO);
+
+        if (CollectionUtils.isNotEmpty(topic.getQuoteTopics())){
+            List<QuoteTopicVO> quoteTopics = new ArrayList<>();
+            for (String q : topic.getQuoteTopics()){
+                QuoteTopicVO temp = new QuoteTopicVO();
+                Topic topicTemp = topicRepository.findTopicById(q);
+                temp.setTopicId(q);
+                temp.setTitle(topicTemp.getName());
+                temp.setLink(linkPre+"/topic/id?id="+q);
+                temp.setScore(Integer.toString(topicTemp.getQuoteIndex()));
+                quoteTopics.add(temp);
+            }
+            topicVO.setQuoteTopics(quoteTopics);
         }
+
         log.info("<successfully searching the topic with id {}>", id);
         return topicVO;
     }
 
-    /**
-     * whether the topic with topic id exist or not?
-     * @param topicId topic id in database
-     * @return topic do
-     */
-    private Topic topicExist(String topicId){
-        Topic topic = topicRepository.findTopicById(topicId);
-        if (Objects.isNull(topic) ||
-                TopicStatusEnum.STATUS_TOPIC_DELETED.getCode().equals(topic.getStatus())){
-            return null;
+    @Override
+    public PageVO<TopicPreviewVO> getAllTopics(GetAllTopicsVO getAllTopicsVO){
+        log.info("<getting all topics belonged to user {}>", getAllTopicsVO.getUserId());
+
+        Pageable pageable = PageRequest.of(getAllTopicsVO.getPage(),getAllTopicsVO.getSize());
+        Page<Topic> topicPage = topicRepository.findTopicsByContributor(pageable, getAllTopicsVO.getUserId());
+        List<Topic> topicList = topicPage.getContent();
+        List<TopicPreviewVO> topicPreviewVOList = topicList.stream()
+                .map(TopicConvert.INSTANCE::do2PreviewVo)
+                .collect(Collectors.toList());
+
+        if (topicPage.getNumberOfElements() == 0) {
+            log.debug("no topic belonged to user {}", getAllTopicsVO.getUserId());
         }
-        return topic;
+        log.info("<successfully get all topics belonged to user {}>", getAllTopicsVO.getUserId());
+
+        return new PageVO<>(getAllTopicsVO.getPage(), getAllTopicsVO.getSize(),
+                topicPage.getTotalPages(), topicPage.getTotalElements(), topicPreviewVOList);
     }
 
     /**
@@ -320,18 +394,56 @@ public class TopicServiceImpl implements ITopicService {
     private Content contentExist(String contentId, String topicId){
         Content content = contentRepository.findContentByIdAndTopicId(contentId,topicId);
         if (Objects.isNull(content) ||
-                ContentStatusEnum.STATUS_CONTENT_DELETED.getCode().equals(content.getStatus())){
+                !ContentStatusEnum.STATUS_CONTENT_RELEASED.getCode().equals(content.getStatus())){
             return null;
         }
         return content;
     }
 
+    /**
+     * whether quote topic repeatedly, whether the quoted topics exist, whether the quoted topics have been deleted
+     * @param quoteTopics the quoted topics list
+     */
+    private void isQuotedRight(List<String> quoteTopics) {
+        if (CollectionUtils.isNotEmpty(quoteTopics)){
+            for (String q : quoteTopics){
+                if (!topicRepository.existsById(q)){
+                    log.error("<Failed: quoted topic {} doesn't exist>", q);
+                    throw new CustomException(ErrorEnum.QUOTE_TOPIC_ERROR_NONEXIST,"");
+                } else if (topicRepository.findTopicById(q).getStatus()
+                        .equals(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode())) {
+                    log.error("<Failed: quoted topic {} has been deleted>", q);
+                    throw new CustomException(ErrorEnum.QUOTE_TOPIC_ERROR_DELETED,"");
+                }
+            }
+            Set<String> topicSet = new HashSet<>(quoteTopics);
+            if (quoteTopics.size() != topicSet.size()){
+                log.error("<Failed: quote topic repeatedly>");
+                throw new CustomException(ErrorEnum.QUOTE_TOPIC_ERROR_REPEAT,"");
+            }
+        }
+    }
+
+    /**
+     * get the user of current http request
+     * @return user id
+     */
     private Long getOperator(){
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert sra != null;
         HttpServletRequest request = sra.getRequest();
         UserVO userVO = (UserVO) request.getAttribute("user");
         return userVO.getUserId();
+    }
+
+    /**
+     * if the user is the contributor, the user has permission to modify the topic
+     * @param topicId the id of the topic needed to be modified in database
+     * @return whether has permission
+     */
+    private Boolean isPermission(String topicId){
+        Topic topic = topicRepository.findTopicById(topicId);
+        return topic.getContributor() == getOperator();
     }
 
     private void createOperationHistory(TopicOperateEnum topicOperateEnum, String topicId){

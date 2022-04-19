@@ -31,5 +31,5 @@ public class User extends BaseDO implements Serializable {
     /**
      * 噪声
      */
-    private String noise;
+    private String nonce;
 }

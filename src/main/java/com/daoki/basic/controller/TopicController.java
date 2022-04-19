@@ -1,8 +1,8 @@
 package com.daoki.basic.controller;
 
 import com.daoki.basic.VO.request.CreateTopicVO;
-import com.daoki.basic.VO.request.DeleteTopicVO;
 import com.daoki.basic.VO.request.FuzzySearchTopicVO;
+import com.daoki.basic.VO.request.GetAllTopicsVO;
 import com.daoki.basic.VO.request.UpdateTopicVO;
 import com.daoki.basic.VO.response.ResultVO;
 import com.daoki.basic.service.ITopicService;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -58,10 +57,9 @@ public class TopicController {
     @PostMapping("/delete")
     public ResultVO deleteTopic(
             @Validated
-            @ApiParam(name = "deletedTopic", value = "a object with topic id and operator", required = true)
-            @RequestBody
-                    DeleteTopicVO deleteTopicVO) {
-        topicService.deleteTopic(deleteTopicVO);
+            @ApiParam(name = "id", value = "topic id", required = true)
+            @RequestParam String id) {
+        topicService.deleteTopic(id);
         return ResultVoUtil.success(null, "delete topic successfully");
     }
 
@@ -76,15 +74,24 @@ public class TopicController {
         return ResultVoUtil.success(topicService.getTopicByName(fuzzySearchTopicVO), "get topic form successfully");
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "query topic by topic id")
     @GetMapping("/id")
     public ResultVO getTopicById(
             @NotNull
             @ApiParam(name = "id", value = "topic id", required = true)
-            @RequestParam
-                    String id) {
+            @RequestParam String id) {
         return ResultVoUtil.success(topicService.getTopicById(id), "get topic successfully");
+    }
+
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ApiOperation(value = "query all topics by user id")
+    @GetMapping("/get-all-topics")
+    public ResultVO getAllTopics(
+            @NotNull
+            @ApiParam(name = "get all topics by user id", value = "a object with user id and page information", required = true)
+            @RequestBody GetAllTopicsVO getAllTopicsVO) {
+        return ResultVoUtil.success(topicService.getAllTopics(getAllTopicsVO), "get topic successfully");
     }
 
 }

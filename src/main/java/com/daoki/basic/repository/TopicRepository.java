@@ -63,4 +63,6 @@ public interface TopicRepository extends MongoRepository<Topic, String> {
      */
     Page<Topic> findTopicsByStatus(Pageable pageable, String status);
 
+    Page<Topic> findTopicsByContributor(Pageable pageable, long userId);
+
 }
