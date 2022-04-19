@@ -1,9 +1,11 @@
 package com.daoki.basic.VO.request;
 
+import com.daoki.basic.entity.Topic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -32,4 +34,12 @@ public class UpdateTopicVO {
 
     @ApiModelProperty(value = "the content modules of topic")
     private List<UpdateContentVO> content;
+
+    @ApiModelProperty(value = "the contributor of topic")
+    @NotNull(message = "the contributor of topic mustn't be null")
+    private Long contributor;
+
+    @ApiModelProperty(value = "the id of topics quoted by this topic")
+    private List<String> quoteTopics;
+
 }

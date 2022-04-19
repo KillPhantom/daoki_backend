@@ -50,11 +50,6 @@ public class Content extends BaseDO implements Serializable {
     private int type;
 
     /**
-     * the contributors (user id) of content module
-     */
-    private List<Long> contributors;
-
-    /**
      * the last editing time of content module
      */
     @Field("last_edit")
@@ -64,6 +59,11 @@ public class Content extends BaseDO implements Serializable {
      * the position of content module because many content modules contained in a topic
      */
     private int position;
+
+    /**
+     * language for the code data type
+     */
+    private String language;
 
     /**
      * the status of content module

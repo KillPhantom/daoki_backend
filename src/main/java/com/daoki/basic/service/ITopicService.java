@@ -1,12 +1,12 @@
 package com.daoki.basic.service;
 
-import com.daoki.basic.VO.request.CreateTopicVO;
-import com.daoki.basic.VO.request.DeleteTopicVO;
-import com.daoki.basic.VO.request.FuzzySearchTopicVO;
-import com.daoki.basic.VO.request.UpdateTopicVO;
+import com.daoki.basic.VO.request.*;
 import com.daoki.basic.VO.response.FuzzySearchTopicFormVO;
 import com.daoki.basic.VO.response.PageVO;
+import com.daoki.basic.VO.response.TopicPreviewVO;
 import com.daoki.basic.VO.response.TopicVO;
+
+import java.util.List;
 
 /**
  * @author Alan
@@ -29,9 +29,9 @@ public interface ITopicService {
 
     /**
      * delete topic according to topic id
-     * @param deleteTopicVO vo for deleting a topic
+     * @param topicId topic id
      */
-    void deleteTopic(DeleteTopicVO deleteTopicVO);
+    void deleteTopic(String topicId);
 
     /**
      * search topics fuzzily according content title
@@ -41,10 +41,17 @@ public interface ITopicService {
     PageVO<FuzzySearchTopicFormVO> getTopicByName(FuzzySearchTopicVO fuzzySearchTopicVO);
 
     /**
-     * find topic according by topic id
+     * find topic according topic id
      * @param id id in database of topic
      * @return topic vo
      */
     TopicVO getTopicById(String id);
+
+    /**
+     * find topic according user id
+     * @param getAllTopicsVO user id
+     * @return topic vo
+     */
+    PageVO<TopicPreviewVO> getAllTopics(GetAllTopicsVO getAllTopicsVO);
 
 }

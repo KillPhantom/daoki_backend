@@ -58,7 +58,7 @@ public class UserServiceImpl implements IUserService {
         User user = UserConvert.INSTANCE.createVo2Do(createUserVO);
         user.setUserId(idGenUtil.nextId());
         Random noise = new Random();
-        user.setNoise(String.valueOf(noise.nextInt()));
+        user.setNonce(String.valueOf(noise.nextInt()));
         return UserConvert.INSTANCE.Do2Vo(userRepository.save(user));
     }
 
@@ -102,7 +102,7 @@ public class UserServiceImpl implements IUserService {
             match = Web3SignatureVerification.verify(
                     userAuthenticationVO.getSignature(),
                     userAuthenticationVO.getPublicAddress(),
-                    PERSONAL_MESSAGE_PREFIX + user.getNoise());
+                    PERSONAL_MESSAGE_PREFIX + user.getNonce());
         }catch (Exception e){
             // TODO @Alan 加一下Api Exception handle 表示签名验证出问题了
             System.out.println(e.toString());
@@ -111,7 +111,7 @@ public class UserServiceImpl implements IUserService {
         if (match) {
             // 更新random
             Random u = new Random();
-            user.setNoise(String.valueOf(u.nextInt()));
+            user.setNonce(String.valueOf(u.nextInt()));
             userRepository.save(user);
             // 认证成功，返回session
             resultVO.setToken(token);

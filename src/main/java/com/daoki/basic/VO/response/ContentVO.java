@@ -29,13 +29,12 @@ public class ContentVO {
     @ApiModelProperty(value = "the type of this content module")
     private Integer type;
 
-    @ApiModelProperty(value = "the contributors' names of this content module")
-    private List<UserVO> contributors;
-
     @ApiModelProperty(value = "the last editing time of this content module")
     private Date lastEdit;
 
     @ApiModelProperty(value = "the position of this content module")
     private Integer position;
 
+    @ApiModelProperty(value = "language for the code data type")
+    private String language;
 }

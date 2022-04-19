@@ -57,7 +57,6 @@ public interface ContentConvert {
      */
     @Mappings({
             @Mapping(target = "contentId", source = "id"),
-            @Mapping(target = "contributors", ignore = true)
     })
     ContentVO do2Vo(Content content);
 }
