@@ -64,7 +64,7 @@ public class Topic extends BaseDO implements Serializable {
     private List<String> quoteTopics;
 
     /**
-     * quoted count
+     * quoted index
      */
-    private int quoteIndex;
+    private String quoteIndex;
 }

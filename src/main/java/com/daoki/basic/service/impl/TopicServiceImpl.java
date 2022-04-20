@@ -82,16 +82,8 @@ public class TopicServiceImpl implements ITopicService {
         topic.setGmtCreate(new Date());
         topic.setViewCount(0);
         topic.setStatus(TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode());
-        topic.setQuoteIndex(0);
+        topic.setContributor(getOperator());
         Topic topicSave = topicRepository.save(topic);
-
-        if(CollectionUtils.isNotEmpty(createTopicVO.getQuoteTopics())){
-            for (String q : createTopicVO.getQuoteTopics()){
-                Topic topicTemp = topicRepository.findTopicById(q);
-                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()+1);
-                topicRepository.save(topicTemp);
-            }
-        }
 
         // save the content in the database one by one
         if(CollectionUtils.isNotEmpty(createTopicVO.getContent())){
@@ -207,23 +199,8 @@ public class TopicServiceImpl implements ITopicService {
         topicSave.setGmtCreate(topic.getGmtCreate());
         topicSave.setViewCount(topic.getViewCount());
         topicSave.setStatus(topic.getStatus());
-        topicSave.setQuoteIndex(topic.getQuoteIndex());
+        topicSave.setContributor(getOperator());
         topicRepository.save(topicSave);
-
-        if (CollectionUtils.isNotEmpty(topic.getQuoteTopics())){
-            for(String q : topic.getQuoteTopics()){
-                Topic topicTemp = topicRepository.findTopicById(q);
-                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()-1);
-                topicRepository.save(topicTemp);
-            }
-        }
-        if (CollectionUtils.isNotEmpty(updateTopicVO.getQuoteTopics())){
-            for(String q : updateTopicVO.getQuoteTopics()){
-                Topic topicTemp = topicRepository.findTopicById(q);
-                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()+1);
-                topicRepository.save(topicTemp);
-            }
-        }
 
         log.info("<successfully update the topic with id {}>", updateTopicVO.getTopicId());
 
@@ -267,19 +244,8 @@ public class TopicServiceImpl implements ITopicService {
             }
         }
 
-
         topic.setStatus(TopicStatusEnum.STATUS_TOPIC_DELETED.getCode());
         topicRepository.save(topic);
-
-        if (CollectionUtils.isNotEmpty(topic.getQuoteTopics())){
-            for (String q : topic.getQuoteTopics()){
-                Topic topicTemp = topicRepository.findTopicById(q);
-                topicTemp.setQuoteIndex(topicTemp.getQuoteIndex()-1);
-                topicRepository.save(topicTemp);
-            }
-        }
-
-
 
         log.info("<successfully delete the topic with id {}>", topicId);
 
@@ -355,7 +321,7 @@ public class TopicServiceImpl implements ITopicService {
                 temp.setTopicId(q);
                 temp.setTitle(topicTemp.getName());
                 temp.setLink(linkPre+"/topic/id?id="+q);
-                temp.setScore(Integer.toString(topicTemp.getQuoteIndex()));
+                temp.setScore("0");
                 quoteTopics.add(temp);
             }
             topicVO.setQuoteTopics(quoteTopics);
@@ -367,19 +333,22 @@ public class TopicServiceImpl implements ITopicService {
 
     @Override
     public PageVO<TopicPreviewVO> getAllTopics(GetAllTopicsVO getAllTopicsVO){
-        log.info("<getting all topics belonged to user {}>", getAllTopicsVO.getUserId());
+
+        Long userId = getOperator();
+
+        log.info("<getting all topics belonged to user {}>", userId);
 
         Pageable pageable = PageRequest.of(getAllTopicsVO.getPage(),getAllTopicsVO.getSize());
-        Page<Topic> topicPage = topicRepository.findTopicsByContributor(pageable, getAllTopicsVO.getUserId());
+        Page<Topic> topicPage = topicRepository.findTopicsByContributor(pageable, userId);
         List<Topic> topicList = topicPage.getContent();
         List<TopicPreviewVO> topicPreviewVOList = topicList.stream()
                 .map(TopicConvert.INSTANCE::do2PreviewVo)
                 .collect(Collectors.toList());
 
         if (topicPage.getNumberOfElements() == 0) {
-            log.debug("no topic belonged to user {}", getAllTopicsVO.getUserId());
+            log.debug("no topic belonged to user {}", userId);
         }
-        log.info("<successfully get all topics belonged to user {}>", getAllTopicsVO.getUserId());
+        log.info("<successfully get all topics belonged to user {}>", userId);
 
         return new PageVO<>(getAllTopicsVO.getPage(), getAllTopicsVO.getSize(),
                 topicPage.getTotalPages(), topicPage.getTotalElements(), topicPreviewVOList);

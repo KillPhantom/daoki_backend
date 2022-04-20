@@ -20,7 +20,4 @@ public class GetAllTopicsVO {
     @NotNull(message = "the page size mustn't be null")
     private Integer size;
 
-    @ApiModelProperty(value = "user id")
-    @NotNull(message = "the user id mustn't be null")
-    private long userId;
 }

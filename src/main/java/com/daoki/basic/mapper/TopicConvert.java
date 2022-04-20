@@ -28,6 +28,7 @@ public interface TopicConvert {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "viewCount", ignore = true),
+            @Mapping(target = "contributor", ignore = true),
             @Mapping(target = "quoteIndex", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
@@ -44,6 +45,7 @@ public interface TopicConvert {
     @Mappings({
             @Mapping(target = "id", source = "topicId"),
             @Mapping(target = "viewCount", ignore = true),
+            @Mapping(target = "contributor", ignore = true),
             @Mapping(target = "quoteIndex", ignore = true),
             @Mapping(target = "status", ignore = true),
             @Mapping(target = "gmtCreate", ignore = true),
@@ -67,10 +69,7 @@ public interface TopicConvert {
     TopicVO do2Vo(Topic topic);
 
 
-    @Mappings({
-            @Mapping(target = "title", source = "name"),
-            @Mapping(target = "quoteIndex", expression = "java(java.lang.Integer.toString(topic.getQuoteIndex()))")
-    })
+    @Mapping(target = "title", source = "name")
     TopicPreviewVO do2PreviewVo(Topic topic);
 
 }
