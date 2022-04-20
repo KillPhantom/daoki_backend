@@ -31,10 +31,6 @@ public class CreateTopicVO {
     @ApiModelProperty(value = "the content modules of topic")
     private List<CreateContentVO> content;
 
-    @ApiModelProperty(value = "the contributor of topic")
-    @NotNull(message = "the contributor of topic mustn't be null")
-    private Long contributor;
-
     @ApiModelProperty(value = "the id of topics quoted by this topic")
     private List<String> quoteTopics;
 
