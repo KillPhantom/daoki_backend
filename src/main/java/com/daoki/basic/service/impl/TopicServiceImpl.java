@@ -105,7 +105,7 @@ public class TopicServiceImpl implements ITopicService {
      * @param updateTopicVO a topic when updating a topic
      */
     @Override
-    public void updateTopic(UpdateTopicVO updateTopicVO) {
+    public String updateTopic(UpdateTopicVO updateTopicVO) {
 
         log.info("<operator {} is updating a new topic with id {}>", getOperator(), updateTopicVO.getTopicId());
 
@@ -205,6 +205,7 @@ public class TopicServiceImpl implements ITopicService {
 
         // save the operation history recording in the database
         createOperationHistory(TopicOperateEnum.OPERATE_UPDATE,updateTopicVO.getTopicId());
+        return topicSave.getId();
     }
 
     /**
@@ -350,6 +351,7 @@ public class TopicServiceImpl implements ITopicService {
         if (topicPage.getNumberOfElements() == 0) {
             log.debug("no topic belonged to user {}", userId);
         }
+        log.info("user has ", topicList.toArray().length);
         log.info("<successfully get all topics belonged to user {}>", userId);
 
         return new PageVO<>(getAllTopicsVO.getPage(), getAllTopicsVO.getSize(),
