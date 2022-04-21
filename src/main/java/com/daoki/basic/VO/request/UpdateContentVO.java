@@ -3,12 +3,7 @@ package com.daoki.basic.VO.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * @author Alan
@@ -26,7 +21,7 @@ public class UpdateContentVO extends CreateContentVO {
     private String contentId;
 
     @ApiModelProperty(value = "the id in database of the topic to which this content module belongs")
-    @NotNull(message = "the topic id mustn't be null")
+    @NotNull(message = "the topic id of content mustn't be null")
     private String topicId;
 
 }

@@ -154,7 +154,6 @@ public class TopicServiceImpl implements ITopicService {
             }
         }
 
-
         isQuotedRight(updateTopicVO.getQuoteTopics());
 
         // get ids of all contents contained in topic with this topic id in database
@@ -339,7 +338,10 @@ public class TopicServiceImpl implements ITopicService {
         log.info("<getting all topics belonged to user {}>", userId);
 
         Pageable pageable = PageRequest.of(getAllTopicsVO.getPage(),getAllTopicsVO.getSize());
-        Page<Topic> topicPage = topicRepository.findTopicsByContributor(pageable, userId);
+        Page<Topic> topicPage = topicRepository.findTopicsByContributorAndStatus(
+                pageable,
+                userId,
+                TopicStatusEnum.STATUS_TOPIC_RELEASED.getCode());
         List<Topic> topicList = topicPage.getContent();
         List<TopicPreviewVO> topicPreviewVOList = topicList.stream()
                 .map(TopicConvert.INSTANCE::do2PreviewVo)

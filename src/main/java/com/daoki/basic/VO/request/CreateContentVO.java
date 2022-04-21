@@ -21,19 +21,19 @@ import java.util.List;
 public class CreateContentVO {
 
     @ApiModelProperty(value = "the body of a content module")
-    @Length(min = 1, max = 1000, message = "the length of body is limited to 1~1000")
+    @Length(min = 1, max = 1000, message = "the length of content body is limited to 1~1000")
     private String body;
 
     @ApiModelProperty(value = "the title of content module")
-    @NotNull(message = "the title mustn't be null")
+    @NotNull(message = "the title of content mustn't be null")
     private String title;
 
     @ApiModelProperty(value = "the type of content module")
-    @NotNull(message = "the type mustn't be null")
+    @NotNull(message = "the type of content mustn't be null")
     private Integer type;
 
     @ApiModelProperty(value = "the position of this content module")
-    @NotNull(message = "the position information mustn't be null")
+    @NotNull(message = "the position information of content mustn't be null")
     private Integer position;
 
     @ApiModelProperty(value = "language for the code data type")

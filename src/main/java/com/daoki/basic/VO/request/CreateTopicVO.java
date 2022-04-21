@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class CreateTopicVO {
     private String name;
 
     @ApiModelProperty(value = "the content modules of topic")
+    @Valid
     private List<CreateContentVO> content;
 
     @ApiModelProperty(value = "the id of topics quoted by this topic")
