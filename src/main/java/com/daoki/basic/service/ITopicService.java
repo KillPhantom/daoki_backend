@@ -25,7 +25,7 @@ public interface ITopicService {
      * update topic
      * @param updateTopicVO a topic when updating a topic
      */
-    void updateTopic(UpdateTopicVO updateTopicVO);
+    String updateTopic(UpdateTopicVO updateTopicVO);
 
     /**
      * delete topic according to topic id

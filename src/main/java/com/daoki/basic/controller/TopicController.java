@@ -5,6 +5,7 @@ import com.daoki.basic.VO.request.FuzzySearchTopicVO;
 import com.daoki.basic.VO.request.GetAllTopicsVO;
 import com.daoki.basic.VO.request.UpdateTopicVO;
 import com.daoki.basic.VO.response.ResultVO;
+import com.daoki.basic.anno.PassToken;
 import com.daoki.basic.service.ITopicService;
 import com.daoki.basic.utils.ResultVoUtil;
 import io.swagger.annotations.*;
@@ -48,8 +49,8 @@ public class TopicController {
             @ApiParam(name = "updatedTopic", value = "a updated topic", required = true)
             @RequestBody
                     UpdateTopicVO updateTopicVO) {
-        topicService.updateTopic(updateTopicVO);
-        return ResultVoUtil.success(null, "update topic successfully");
+        String topicId = topicService.updateTopic(updateTopicVO);
+        return ResultVoUtil.success(topicId, "update topic successfully");
     }
 
     @CrossOrigin(origins = "*",maxAge = 3600)
@@ -66,6 +67,7 @@ public class TopicController {
     @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "query fuzzily topic by name")
     @GetMapping("/name")
+    @PassToken
     public ResultVO getTopicByName(
             @Validated
             @ApiParam(name = "fuzzySearchedTopic", value = "a object with keyword and page information", required = true)
@@ -77,6 +79,7 @@ public class TopicController {
     @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "query topic by topic id")
     @GetMapping("/id")
+    @PassToken
     public ResultVO getTopicById(
             @NotNull
             @ApiParam(name = "id", value = "topic id", required = true)
@@ -86,7 +89,7 @@ public class TopicController {
 
     @CrossOrigin(origins = "*",maxAge = 3600)
     @ApiOperation(value = "query all topics by user id")
-    @GetMapping("/get-all-topics")
+    @PostMapping("/get-all-topics")
     public ResultVO getAllTopics(
             @NotNull
             @ApiParam(name = "get all topics by user id", value = "a object with user id and page information", required = true)
