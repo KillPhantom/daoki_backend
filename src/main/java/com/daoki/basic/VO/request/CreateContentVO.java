@@ -25,7 +25,7 @@ public class CreateContentVO {
     private String body;
 
     @ApiModelProperty(value = "the title of content module")
-    @NotNull(message = "the title of content mustn't be null")
+    // it's possible that title is null if it's not text content
     private String title;
 
     @ApiModelProperty(value = "the type of content module")
